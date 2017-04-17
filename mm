@@ -1,5 +1,5 @@
 #!/bin/bash
-gua_dir=/home/spark/jiegua/guaci
+gua_dir=/home/spark/document/jiegua/guaci
 ####卦名 乾 兑 离 震 巽 坎 艮 坤
 ####本卦 1 2 3 4 5 6 7 8 已知
 ####二进 7 3 5 1 6 2 4 0 求
@@ -12,9 +12,16 @@ gua_dir=/home/spark/jiegua/guaci
 ####变5  3 4 1 2 7 8 5 6
 ####变6  2 1 4 3 6 5 8 7
 
- [[ $2 =~ ^[1-9][0-9]*$ ]] || exit
- [[ $3 =~ ^[1-9][0-9]*$ ]] || exit
+#[[ $2 =~ ^[1-9][0-9]*$ ]] || exit
+#[[ $3 =~ ^[1-9][0-9]*$ ]] || exit
 #按卦序查询，2个参数，如：mm  43
+if [[ $1 =~ s|m|c|z|b|d ]];then
+	shang=1      	
+else
+	echo "Error:wrong pattern."
+	exit
+fi
+
 if [ $1 == "s" ];then
 	shang=$[$3/10+10]
 	xia=$[$3%10]
@@ -23,11 +30,23 @@ if [ $1 == "s" ];then
 	if [ $dong == 0 ];then dong=6;fi
 	dong=${gua_shu}$dong
 	gua_shu=${gua_shu}"0"
-	
+fi
+
+#按卦名查询
+if [ $1 == "m" ];then
+	shang=0
+	str=' '
+	until  [[ $str == $2 ]]
+	do
+		shang=$[$shang+1]
+		str=`grep $2 $gua_dir/xiantian |cut -f $shang`
+	done
+	xia=`grep -n $2 $gua_dir/xiantian|cut -d ':' -f 1`
+	dong=1
 fi
 
 #数字占，3个参数，如：mm 5 3
-if [ $1 != "s" ];then
+if [[ $1 =~ c|z|b|d ]];then
 	shang=$[$2%8]
 	if [ $shang == 0 ];then shang=8;fi
 	xia=$[$3%8]
@@ -46,7 +65,7 @@ if [ $1 != "s" ];then
 			shang=${a[$xia]}
 			xia=${a[$zhong]}
 		;;
-		b)	#变卦
+		d)	#变卦
 			case $dong in
 				1)	a=(9 4 8 2 6 3 7 1 5);;
 				2)	a=(9 6 2 8 4 5 1 7 3);;
@@ -60,6 +79,8 @@ if [ $1 != "s" ];then
 		;;
 	esac
 fi
+
+#上下卦数及变爻数已定
 dong=${shang}${xia}$dong
 gua_shu=${shang}${xia}"0"
 	
@@ -75,6 +96,7 @@ case $shang in
 	7) echo -e "—————\n—— ——\n—— ——";;
 	8) echo -e "—— ——\n—— ——\n—— ——";;
 esac
+
 case $xia in
 	1) echo -e "—————\n—————\n—————";;
 	2) echo -e "—— ——\n—————\n—————";;
