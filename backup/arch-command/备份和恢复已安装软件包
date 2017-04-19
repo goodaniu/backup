@@ -1,0 +1,75 @@
+一、备份和恢复已安装软件包
+定期备份软件包是个好习惯。万一系统出了大问题，需要重装，就可以利用备份的软件包恢复到原先的系统。
+
+第一步，生成系统上安装的非本地（即从官方仓库获取的）软件包列表：
+ $ comm -23 <(pacman -Qeq|sort) <(pacman -Qmq|sort) > pkglist
+把生成的pkglist存储在一个安全的地方，比如U盘，或者gist.github.com、evernote、dropbox之类的文本储存网站。
+今后重装系统时，把pkglist复制到新系统。
+使用如下命令安装所有软件包：
+ # pacman -S $(< pkglist)
+要是备份的软件包列表包含非官方软件包（从AUR或其他什么地方下载的），就得使用下面这个吓人的命令了，不然pacman会出错：
+
+# pacman -S --needed $(diff <(cat badpkglist|sort) <(diff <(cat badpkglist|sort) <(pacman -Slq|sort)|grep \<|cut -f2 -d' ')|grep \<|cut -f2 -d' ')
+解释：
+
+pacman -Slq列出所有可以安装的软件包。由于输出是按照来源仓库排序的，需要再调用sort排序。
+排序是为diff命令比对列表做准备。
+第一个diff返回所有无法安装的软件包；第二个返回所有可以安装的软件包。
+--needed表示跳过已安装软件包。
+可以接着用yaourt恢复从AUR获取的软件包（不推荐）：
+
+$ yaourt -S --noconfirm $(diff <(cat badpkglist|sort) <(pacman -Slq|sort) |grep \<|cut -f2 -d' ')
+最后，还可以卸载掉新系统上安装的、但之前系统并未安装的软件包。 警告：务必小心使用，仔细查看pacman输出，避免悲剧。
+
+# pacman -Rsu $(diff <(cat badpkglist|sort) <(pacman -Qq|sort) | grep \>|cut -f2 -d' ')
+
+二、列出所有不属于base或base-devel的已安装软件包
+下列命令输出所有不属于base或base-devel软件包组的已安装软件包。这些软件包一般都是用户自己安装的：
+##############################
+##############################
+##############################
+
+comm -23 <(pacman -Qeq|sort) <(pacman -Qgq base base-devel|sort)  >pkglist
+comm -12 <(comm -23 <(pacman -Qeq|sort) <(pacman -Qmq|sort)) <(sort pkglist) | pacman -S -           # paclist
+comm -13 <(comm -23 <(pacman -Qeq|sort) <(pacman -Qmq|sort)) <(sort pkglist) | yaourt -S -              #aurlist
+comm -12 <(comm -23 <(pacman -Qdq|sort) <(pacman -Qmq|sort)) <(sort pkglist) | pacman -S --asdeps -      #asdepslist
+##############################
+##############################
+##############################
+
+三、重新安装所有软件包
+
+这要是你的系统遭到了大规模破坏（比如rm -rf什么的），可以通过pacman重新安装所有软件包来挽救。
+
+如果没有安装外来软件包（比如来自AUR的），使用如下命令即可：
+
+# pacman -Qeq | pacman -S -
+# pacman -Qdq | pacman -S --asdeps -
+如果安装了外来软件包，使用上面的命令会出错。下面的命令先生成所有软件包列表，再用pacman -Qmq剔除外来软件包，即重新安装所有仓库中可以找到的软件包，同时保留依赖安装、手动安装标志：
+
+# comm -23 <(pacman -Qeq) <(pacman -Qmq) | pacman -S -
+# comm -23 <(pacman -Qdq) <(pacman -Qmq) | pacman -S --asdeps -
+
+
+1.Recreate a package from the file system
+Keeping a list of explicitly installed packages can be useful to speed up installation on a new system:
+
+	$ pacman -Qqe > pkglist.txt
+
+Note: If you used -Qqet, when reinstalling the list all the non-top-level packages would be set as dependencies.
+To install packages from the list backup, run:
+
+	# pacman -S - < pkglist.txt
+Tip: Use 	comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > optdeplist.txt	 to also create a list of the installed optional dependencies which can be reinstalled with --asdeps.
+In case the list includes foreign packages, such as AUR packages, remove them first:
+
+	# pacman -S $(comm -12 <(pacman -Slq | sort) <(sort pkglist.txt))
+To remove all the packages on your system that are not mentioned in the list:
+
+	# pacman -Rsu $(comm -23 <(pacman -Qq | sort) <(sort pkglist.txt))
+
+2.Reinstalling all packages
+To reinstall all native packages, use:
+
+	# pacman -Qnq | pacman -S -
+Foreign (AUR) packages must be reinstalled separately; you can list them with 	pacman -Qmq.

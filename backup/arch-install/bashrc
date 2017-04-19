@@ -1,0 +1,26 @@
+#
+# ~/.bashrc
+#
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+PS1="\[\e[31;1m\]\t \w \n\[\e[33;1m\]==> \[\e[0m\]" 
+
+alias oo='startx ~/.xinitrc'
+alias ls='ls --color=auto'
+
+alias vf='mplayer -vo fbdev2 -zoom -x 1366 -y 768'
+alias vl='mplayer -vo fbdev2 -zoom -x 1366 -y 768 -playlist'
+alias cow='fortune | cowsay'
+alias v='sudo vim'
+alias vol='alsamixer'
+
+# Pacman 别名示例
+alias pacupg='sudo pacman -Syu --noconfirm'        # 同步软件仓库信息然后升级系统
+alias pacin='sudo pacman -S'           # 从软件仓库安装软件包
+alias pacins='sudo pacman -U'          # 从本地文件安装软件包
+alias pacre='sudo pacman -R'           # 删除软件包，保留配置和依赖
+alias pacrem='sudo pacman -Rns'        # 彻底删除软件包，清除配置，删除无用依赖
+alias pacrep='pacman -Si'              # 显示软件仓库中某软件包的信息
+alias pacreps='pacman -Ss'             # 在软件仓库搜索软件包
+alias pacloc='pacman -Qi'              # 显示本地数据库中某软件包的信息
+alias paclocs='pacman -Qs'             # 在本地数据库搜索软件包

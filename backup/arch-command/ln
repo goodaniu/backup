@@ -1,0 +1,2 @@
+ln -s /home/spark/.cache/kuwo/song ~/music/
+ln -s 源目录  新链接

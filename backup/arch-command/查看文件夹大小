@@ -1,0 +1,5 @@
+df -h   #查看挂载信息
+du -sh  #当前目录
+du -sh *	sort -n 统计当前文件夹(目录)大小，并按文件大小排序
+du -skh /video
+sudo du -skh /var

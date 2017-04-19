@@ -1,0 +1,8 @@
+#!/bin/bash
+mkdir /mnt/old
+mkdir /mnt/new
+mount /dev/sda5 /mnt/old
+mount /dev/sda1 /mnt/new
+cp -aP /mnt/old /mnt/new
+nano /etc/fstab
+#sudo update-grub

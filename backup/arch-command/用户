@@ -1,0 +1,6 @@
+#修改用户名
+		usermod -l newuser -d /home/newuser -m olduser
+
+#添加新用户
+		useradd –d /home/myname -m myame
+# useradd -m -g 初始组 -G 附加组 -s 登陆shell 用户

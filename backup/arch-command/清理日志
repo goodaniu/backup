@@ -1,0 +1,9 @@
+手动清理日志
+/var/log/journal 存放着日志, rm 应该能工作. 或者使用journalctl,
+
+例如:
+
+清理日志使总大小小于 100M:
+# journalctl --vacuum-size=100M
+清理最早两周前的日志.
+# journalctl --vacuum-time=2weeks
