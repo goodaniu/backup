@@ -1,6 +1,7 @@
 #!/bin/bash
-gua_dir=/home/spark/document/jiegua/guaci
-tian=/home/spark/document/jiegua/xiantian
+#这个是用来梅花易数和查询卦的，下面两个路径请注意保持正确
+gua_dir=/home/spark/git/jiegua/guaci
+tian=/home/spark/git/jiegua/xiantian
 ####卦名 乾 兑 离 震 巽 坎 艮 坤
 ####本卦 1 2 3 4 5 6 7 8 已知
 ####二进 7 3 5 1 6 2 4 0 求
@@ -33,30 +34,42 @@ if [ $1 == "cx" ];then
 fi
 
 #按卦名查询,如: mm cm 丰
+if [ $1 == "cm" ];then
+	shang=0
+	str=' '
+	until  [[ $str == $2 ]]
+	do
+		shang=$[$shang+1]
+		str=`grep $2 $tian |cut -f $shang`
+	done
+	xia=`grep -n $2 $tian|cut -d ':' -f 1`
+	dong=1
+fi
 ####if [ $1 == "cm" ];then
-####	shang=`grep $2 $tian|awk  'FS==ENVIRON[2] {print $1}'|awk '{print result=NF+1}'|echo $result`
+####	str=$2
+####	shang=`grep $2 $tian|awk -v var=$str 'FS==$var {print $1}'|awk '{print NF+1}'`
 ####	xia=`grep -n $2 $tian|cut -d ':' -f 1`
 ####	dong=1
 ####fi
 
-#数字占，3个参数，如：mm 5 3
+#数字占，3个参数，如：mm cuo 5 3
 if [[ $1 =~ cuo|zong|bian|ben ]];then
 	shang=$[$[$2-1]%8+1]
 	xia=$[$[$3-1]%8+1]
 	dong=$[$[$2+$3-1]%6+1]
 	case $1 in 
-		cuo)	#错卦
+		cuo)	#错卦 mm cuo 43 3
 			a=(9 8 7 6 5 4 3 2 1)
 			shang=${a[$shang]}
 			xia=${a[$xia]}
 		;;
-		zong)	#综卦
+		zong)	#综卦 mm zong 3 22
 			a=( 9 1 5 3 7 2 6 4 8 )
 			zhong=$shang
 			shang=${a[$xia]}
 			xia=${a[$zhong]}
 		;;
-		bian)	#变卦
+		bian)	#变卦 mm bian 3 33
 			case $dong in
 				1)	a=(9 4 8 2 6 3 7 1 5);;
 				2)	a=(9 6 2 8 4 5 1 7 3);;
