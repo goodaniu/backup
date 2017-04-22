@@ -14,8 +14,6 @@ tian=/home/spark/git/jiegua/xiantian
 ####变5  3 4 1 2 7 8 5 6
 ####变6  2 1 4 3 6 5 8 7
 
-#[[ $2 =~ ^[1-9][0-9]*$ ]] || exit
-#[[ $3 =~ ^[1-9][0-9]*$ ]] || exit
 if [[ $1 =~ cx|cm|cuo|zong|bian|ben ]];then
 	shang=1      	
 else
@@ -23,42 +21,52 @@ else
 	exit
 fi
 
-#按卦序查询，2个参数，如：mm cx 43
+#按卦序查询，2个参数，如：mm cx
 if [ $1 == "cx" ];then
-	shang=$[$2/10+10]
-	xia=$[$2%10]
+    echo "您想要查询第几个卦？"
+    read intx
+    echo "第几爻？"
+    read dong
+	shang=$[$intx/10+10]
+	xia=$[$intx%10]
 	gua_shu=`awk -v var1=$shang -v var2=$xia 'NR==var1 {print $var2}' $tian`
 	shang=$[$gua_shu/10]
 	xia=$[$gua_shu%10]
-	dong=$[$[$2-1]%6+1]
 fi
 
 #按卦名查询,如: mm cm 丰
 if [ $1 == "cm" ];then
+    echo "请输入卦名："
+    read str
+    echo "第几爻？"
+    read dong
 	shang=0
-	str=' '
-	until  [[ $str == $2 ]]
+	str1=' '
+	until  [[ $str1 == $str ]]
 	do
 		shang=$[$shang+1]
-		str=`grep $2 $tian |cut -f $shang`
+		str=`grep $str $tian |cut -f $shang`
 	done
-	xia=`grep -n $2 $tian|cut -d ':' -f 1`
-	dong=1
+	xia=`grep -n $str $tian|cut -d ':' -f 1`
 fi
-####if [ $1 == "cm" ];then
-####	str=$2
-####	shang=`grep $2 $tian|awk -v var=$str 'FS==$var {print $1}'|awk '{print NF+1}'`
-####	xia=`grep -n $2 $tian|cut -d ':' -f 1`
-####	dong=1
-####fi
+#####if [ $1 == "cm" ];then
+#####	str=$2
+#####	shang=$(grep $2 $tian|awk  'FS==ENVIRON[2] {print $1}'|awk '{print NF+1}')
+#####	xia=`grep -n $2 $tian|cut -d ':' -f 1`
+#####	dong=1
+#####fi
 
-#数字占，3个参数，如：mm cuo 5 3
+#数字占，2个参数，如：mm cuo
 if [[ $1 =~ cuo|zong|bian|ben ]];then
-	shang=$[$[$2-1]%8+1]
-	xia=$[$[$3-1]%8+1]
-	dong=$[$[$2+$3-1]%6+1]
+    echo "第1个数："
+    read int1
+    echo "第2个数："
+    read int2
+	shang=$[$[$int1-1]%8+1]
+	xia=$[$[$int2-1]%8+1]
+	dong=$[$[$int1+$int2-1]%6+1]
 	case $1 in 
-		cuo)	#错卦 mm cuo 43 3
+		cuo)	#错卦 mm cuo
 			a=(9 8 7 6 5 4 3 2 1)
 			shang=${a[$shang]}
 			xia=${a[$xia]}
@@ -89,31 +97,62 @@ dong=${shang}${xia}$dong
 gua_shu=${shang}${xia}"0"
 	
 
-#输出
-case $shang in
-	1) echo -e "—————\n—————\n—————";;
-	2) echo -e "—— ——\n—————\n—————";;
-	3) echo -e "—————\n—— ——\n—————";;
-	4) echo -e "—————\n—— ——\n—————";;
-	5) echo -e "—————\n—————\n—— ——";;
-	6) echo -e "—— ——\n—————\n—— ——";;
-	7) echo -e "—————\n—— ——\n—— ——";;
-	8) echo -e "—— ——\n—— ——\n—— ——";;
-esac
-
-case $xia in
-	1) echo -e "—————\n—————\n—————";;
-	2) echo -e "—— ——\n—————\n—————";;
-	3) echo -e "—————\n—— ——\n—————";;
-	4) echo -e "—————\n—— ——\n—————";;
-	5) echo -e "—————\n—————\n—— ——";;
-	6) echo -e "—— ——\n—————\n—— ——";;
-	7) echo -e "—————\n—— ——\n—— ——";;
-	8) echo -e "—— ——\n—— ——\n—— ——";;
-esac
-
+#####输出
+####case $shang in
+####	1) echo -e "—————\n—————\n—————";;
+####	2) echo -e "—— ——\n—————\n—————";;
+####	3) echo -e "—————\n—— ——\n—————";;
+####	4) echo -e "—————\n—— ——\n—————";;
+####	5) echo -e "—————\n—————\n—— ——";;
+####	6) echo -e "—— ——\n—————\n—— ——";;
+####	7) echo -e "—————\n—— ——\n—— ——";;
+####	8) echo -e "—— ——\n—— ——\n—— ——";;
+####esac
+####
+####case $xia in
+####	1) echo -e "—————\n—————\n—————";;
+####	2) echo -e "—— ——\n—————\n—————";;
+####	3) echo -e "—————\n—— ——\n—————";;
+####	4) echo -e "—————\n—— ——\n—————";;
+####	5) echo -e "—————\n—————\n—— ——";;
+####	6) echo -e "—— ——\n—————\n—— ——";;
+####	7) echo -e "—————\n—— ——\n—— ——";;
+####	8) echo -e "—— ——\n—— ——\n—— ——";;
+####esac
+c=(9 7 3 5 1 6 2 4 0)
+b=()
+shang=${c[$shang]}
+xia=${c[$xia]}
+b[1]=$[$xia%2]
+b[2]=$[$[$xia%4]/2]
+b[3]=$[$[$xia/4]/2]
+b[4]=$[$shang%2]
+b[5]=$[$[$shang%4]/2]
+b[6]=$[$[$shang/4]/2]
+bian=$[$dong%10]
+echo  
+for i in 6 5 4 3 2 1
+do
+	if [ $[b[$i]] == 0 ];then
+		if [ $bian == $i ];then
+			echo -e "\e[1;31m—— ——\e[0m   ~>   \e[1;31m—————\e[0m"
+		else
+			echo "—— ——        —— ——"
+		fi
+	fi
+	if [ $[b[$i]] == 1 ];then
+		if [ $bian == $i ];then
+			echo -e "\e[1;31m—————\e[0m   ~>   \e[1;31m—— ——\e[0m"
+		else
+			echo "—————        —————"
+		fi
+	fi
+done
+echo
 head -4 $gua_dir/$gua_shu
+echo
 head -3 $gua_dir/$dong
+echo
 tail -3 $gua_dir/$dong
 
 #less $gua_shu
