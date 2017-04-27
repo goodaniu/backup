@@ -40,14 +40,14 @@ if [ $1 == "cm" ];then
     read str
     echo "第几爻？"
     read dong
-	shang=0
-	str1=' '
-	until  [[ $str1 == $str ]]
-	do
-		shang=$[$shang+1]
-		str=`grep $str $tian |cut -f $shang`
-	done
-	xia=`grep -n $str $tian|cut -d ':' -f 1`
+    shang=0
+    str1=' '
+    until  [[ $str1 == $str ]]
+    do
+    	shang=$[$shang+1]
+	str1=`grep $str $tian |cut -f $shang`
+    done
+    xia=`grep -n $str $tian|cut -d ':' -f 1`
 fi
 #####if [ $1 == "cm" ];then
 #####	str=$2
@@ -119,10 +119,10 @@ gua_shu=${shang}${xia}"0"
 ####	7) echo -e "—————\n—— ——\n—— ——";;
 ####	8) echo -e "—— ——\n—— ——\n—— ——";;
 ####esac
-c=(9 7 3 5 1 6 2 4 0)
+a=(9 7 3 5 1 6 2 4 0)
 b=()
-shang=${c[$shang]}
-xia=${c[$xia]}
+shang=${a[$shang]}
+xia=${a[$xia]}
 b[1]=$[$xia%2]
 b[2]=$[$[$xia%4]/2]
 b[3]=$[$[$xia/4]/2]
