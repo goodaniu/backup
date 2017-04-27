@@ -14,18 +14,30 @@ tian=/home/spark/git/jiegua/xiantian
 ####变5  3 4 1 2 7 8 5 6
 ####变6  2 1 4 3 6 5 8 7
 
-if [[ $1 =~ cx|cm|cuo|zong|bian|ben ]];then
+if [[ $1 =~ date|cx|cm|cuo|zong|bian|ben ]];then
 	shang=1      	
 else
 	echo "Error:wrong pattern."
 	exit
 fi
 
+if [ $1 == "date" ];then
+    echo -e "请输入农月份和日期：\n月份：\c"
+    read i
+    echo -e "日期：\c"
+    read j
+    shang=$[$[9+$j+$i]%8+1]
+    k=`date +%H`
+    k=$[$[$k+1]/2+1]
+    if [ $k=13 ];then k=1;fi
+    xia=$[$[9+$j+$i+$k]%8+1]
+    dong=$[$[9+$i+$j+$k]%6+1]
+fi
 #按卦序查询，2个参数，如：mm cx
 if [ $1 == "cx" ];then
-    echo "您想要查询第几个卦？"
+    echo -e "您想要查询第几个卦？"
     read intx
-    echo "第几爻？"
+    echo -e "第几爻？\c"
     read dong
 	shang=$[$intx/10+10]
 	xia=$[$intx%10]
@@ -36,18 +48,18 @@ fi
 
 #按卦名查询,如: mm cm 丰
 if [ $1 == "cm" ];then
-    echo "请输入卦名："
+    echo -e "请输入卦名：\c"
     read str
-    echo "第几爻？"
+    echo -e "第几爻：\c"
     read dong
-	shang=0
-	str1=' '
-	until  [[ $str1 == $str ]]
-	do
-		shang=$[$shang+1]
-		str=`grep $str $tian |cut -f $shang`
-	done
-	xia=`grep -n $str $tian|cut -d ':' -f 1`
+    shang=0
+    str1=' '
+    until  [[ $str1 == $str ]]
+    do
+    	shang=$[$shang+1]
+	str1=`grep $str $tian |cut -f $shang`
+    done
+    xia=`grep -n $str $tian|cut -d ':' -f 1`
 fi
 #####if [ $1 == "cm" ];then
 #####	str=$2
@@ -58,9 +70,9 @@ fi
 
 #数字占，2个参数，如：mm cuo
 if [[ $1 =~ cuo|zong|bian|ben ]];then
-    echo "第1个数："
+    echo -e "第1个数：\c"
     read int1
-    echo "第2个数："
+    echo -e "第2个数：\c"
     read int2
 	shang=$[$[$int1-1]%8+1]
 	xia=$[$[$int2-1]%8+1]
@@ -119,10 +131,11 @@ gua_shu=${shang}${xia}"0"
 ####	7) echo -e "—————\n—— ——\n—— ——";;
 ####	8) echo -e "—— ——\n—— ——\n—— ——";;
 ####esac
-c=(9 7 3 5 1 6 2 4 0)
+echo -e "\n\e[1;32m老实人竭诚为您解卦：\e[0m"
+a=(9 7 3 5 1 6 2 4 0)
 b=()
-shang=${c[$shang]}
-xia=${c[$xia]}
+shang=${a[$shang]}
+xia=${a[$xia]}
 b[1]=$[$xia%2]
 b[2]=$[$[$xia%4]/2]
 b[3]=$[$[$xia/4]/2]
