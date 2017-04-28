@@ -1,7 +1,0 @@
-4. 发送邮件
-
-echo "测试test" | mutt -s "test" goodaniu@163.com
-直接发送，不会打开vim和邮件发送客户端
-
-mutt goodaniu@163.com -s 'test send mail'
-会打开vim编辑器和邮件客户端，需要手工输入一些控制命令
