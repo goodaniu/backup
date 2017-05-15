@@ -1,0 +1,9 @@
+help	帮助
+date	按时辰占
+cx	按卦序查询
+cm	按卦名占
+cuo	错卦
+zong	综卦
+bian	变卦
+ben	本卦
+hu	互卦
