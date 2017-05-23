@@ -17,16 +17,20 @@ other=~/ggg/jiegua/other
 if [[ $1 =~ help|date|cx|cm|cuo|zong|bian|ben ]];then
 	shang=1
 else
-	echo "Error:wrong pattern."
-	exit
+	int1=$RANDOM
+	int2=$RANDOM
+	shang=$[$[$int1-1]%8+1]
+	xia=$[$[$int2-1]%8+1]
+	dong=$[$[$int1+$int2-1]%6+1]
 fi
 
-if [ $1 == "help" ];then
+
+if [[ $1 == "help" ]];then
 	cat $other/help.txt
 	exit
 fi
 
-if [ $1 == "date" ];then
+if [[ $1 == "date" ]];then
     echo -e "请输入农月份和日期：\n月份：\c"
     read i
     echo -e "日期：\c"
@@ -39,7 +43,7 @@ if [ $1 == "date" ];then
     dong=$[$[9+$i+$j+$k]%6+1]
 fi
 #按卦序查询，2个参数，如：mm cx
-if [ $1 == "cx" ];then
+if [[ $1 == "cx" ]];then
     echo -e "您想要查询第几个卦？"
     read intx
     echo -e "第几爻？\c"
@@ -52,7 +56,7 @@ if [ $1 == "cx" ];then
 fi
 
 #按卦名查询,如: mm cm 丰
-if [ $1 == "cm" ];then
+if [[ $1 == "cm" ]];then
     echo -e "请输入卦名：\c"
     read str
     echo -e "第几爻：\c"
@@ -117,10 +121,10 @@ shang=${a[$shang]}
 xia=${a[$xia]}
 b[1]=$[$xia%2]
 b[2]=$[$[$xia%4]/2]
-b[3]=$[$[$xia/4]%2]
+b[3]=$[$xia/4]
 b[4]=$[$shang%2]
 b[5]=$[$[$shang%4]/2]
-b[6]=$[$[$shang/4]%2]
+b[6]=$[$shang/4]
 by=$[$dong%10]
 echo -e "\n 本卦      变卦      互卦      综卦      错卦"
 function huayao(){
