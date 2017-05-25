@@ -1,5 +1,0 @@
-Welcome to the goodaniu's wiki!
-#+title:知识管理
-#+email:goodaniu@163.com
-#+OPTIONS: \n:t num:t toc:t
-[[https://github.com/goodaniu/backup/wiki/gentoo%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%92%8C%E6%8A%80%E5%B7%A7][1. gentoo使用过程中遇到的问题和技巧]]
