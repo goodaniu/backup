@@ -157,7 +157,7 @@ ag $str
 - index：缓存区域，临时保存本地改动。（记作B）
 - local repository: 本地仓库，只想最后一次提交HEAD。（记作C）
 - remote repository：远程仓库。（记作D）
-#+BEGIN_QUOTE
+#+BEGIN_VERSE
 #初始化
 git init //创建
 git clone /path/to/repository //检出
@@ -208,6 +208,8 @@ gitk //开灯图形化git
 git config color.ui true //彩色的 git 输出
 git config format.pretty oneline //显示历史记录时，每个提交的信息只显示一行
 git add -i //交互式添加文件到暂存区
-#+END_QUOTE
+
+#+END_VERSE
+
   
 [[file:git流程图.png]]
