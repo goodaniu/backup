@@ -1,0 +1,5 @@
+#+OPTIONS: \n:t
+
+[[file:wiki/gentoo使用过程中遇到的问题和技巧.org]]
+
+
