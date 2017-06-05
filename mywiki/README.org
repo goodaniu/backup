@@ -216,3 +216,21 @@ git add -i //交互式添加文件到暂存区
 #+BEGIN_SRC bash
 ibus-daemon -drx
 #+END_SRC
+
+** 当机时安全重新开机
+[[https://blog.gtwang.org/linux/safe-reboot-of-linux-using-magic-sysrq-key/]]
+在一般 Linux 當機的狀況下，若要重新啟動系統，可以按住 Alt + SysRq 兩個鍵，然後依序按下以下幾個指令鍵，依照這樣的順序可以盡可能促使所有的程式正常關閉、資料同步寫入磁碟之後，再重新啟動 Linux系統，而在依照順序按下這些指令鍵時，每按完一個按鍵請等待幾秒鐘後，再繼續按下一個，讓電腦有時間處理每個動作。
+#+BEGIN_SRC bash
+alt+SysRq r e i s u b
+#+END_SRC
+指令鍵/說明
+- r 將鍵盤解除 raw 模式（unraw）。
+- e 送出 SIGTERM 訊號至系統上所有的行程，讓所有正在執行中的程式正常關閉。
+- i 送出 SIGKILL 訊號至系統上所有的行程，強制所有正在執行中的程式立即關閉。
+- s 同步（sync）所有掛載磁碟的寫入，讓資料實際寫入實體磁碟。
+- u 以唯讀（read-only）方式重新掛載所有磁碟。
+- b 立即重新啟動系統（此動作並不會將資料同步寫入至硬碟，也不會讓硬碟卸載）。
+- n 重設所有高優先順序（real-time）行程的 nice 設定值。
+- f 呼叫 oom_kill 中止使用大量記憶體的行程。
+- o 將電腦直接關機。
+- k 中止目前 virtual console 下的所有程式（Secure Access Key，SAK）。
