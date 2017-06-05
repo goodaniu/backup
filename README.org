@@ -2,7 +2,7 @@
 #+email:goodaniu@163.com
 #+options: \n:t num:t toc:t
 #+startup:indent
-
+* gentoo
 ** 同帐户下不同终端通信
 #+BEGIN_SRC bash
    echo "hello,world" >/dev/pts/3   
@@ -219,10 +219,13 @@ ibus-daemon -drx
 
 ** 当机时安全重新开机
 [[https://blog.gtwang.org/linux/safe-reboot-of-linux-using-magic-sysrq-key/]]
-在一般 Linux 當機的狀況下，若要重新啟動系統，可以按住 Alt + SysRq 兩個鍵，然後依序按下以下幾個指令鍵，依照這樣的順序可以盡可能促使所有的程式正常關閉、資料同步寫入磁碟之後，再重新啟動 Linux系統，而在依照順序按下這些指令鍵時，每按完一個按鍵請等待幾秒鐘後，再繼續按下一個，讓電腦有時間處理每個動作。
+
+在一般 Linux 當機的狀況下，若要重新啟動系統，可以按住 Alt + SysRq 兩個鍵，然後依序按下以下幾個指令鍵:
 #+BEGIN_SRC bash
-alt+SysRq r e i s u b
+Alt+SysRq r e i s u b
 #+END_SRC
+依照這樣的順序可以盡可能促使所有的程式正常關閉、資料同步寫入磁碟之後，再重新啟動 Linux系統，而在依照順序按下這些指令鍵時，每按完一個按鍵請等待幾秒鐘後，再繼續按下一個，讓電腦有時間處理每個動作。
+
 指令鍵/說明
 - r 將鍵盤解除 raw 模式（unraw）。
 - e 送出 SIGTERM 訊號至系統上所有的行程，讓所有正在執行中的程式正常關閉。
