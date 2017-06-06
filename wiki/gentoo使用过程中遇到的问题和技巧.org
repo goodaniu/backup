@@ -110,7 +110,7 @@ sudo cpupower frequency-info
 sudo cpupower frequency-set -u 1.5GHz
 #+END_SRC
 
-* urxvt字体方框的问题
+* urxvt,emacs中文字体变方框的问题
 应该是xft的梗，因为emacs的中文显示也不正常
 
 也许可以试试：emerge urxvtconfig urxvt-perls urxvt-font-size
