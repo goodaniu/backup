@@ -144,9 +144,11 @@ scrot -se 'mv $f ~/picture/ 2>/dev/null'
 #+END_SRC
 
 * 搜索文档内容
+e.g. 在document目录中搜索含有内容"hello"的文件
 #+BEGIN_SRC bash
-cd $dir
-ag $str
+sudo emerge the_silver_searcher
+cd document
+ag hello
 #+END_SRC
 
 * git常用命令
