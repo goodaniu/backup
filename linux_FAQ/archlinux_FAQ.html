@@ -1,0 +1,1550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-06-18 Sun 17:16 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>archlinux使用FAQ</title>
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">archlinux使用FAQ</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline32">1. archlinux</a>
+<ul>
+<li><a href="#orgheadline1">1.1. archlinux备份配置文件</a></li>
+<li><a href="#orgheadline2">1.2. awmtt-test-awesome</a></li>
+<li><a href="#orgheadline3">1.3. chattr</a></li>
+<li><a href="#orgheadline4">1.4. chroot</a></li>
+<li><a href="#orgheadline5">1.5. comm</a></li>
+<li><a href="#orgheadline6">1.6. cp完全复制迁移系统</a></li>
+<li><a href="#orgheadline7">1.7. kill<sub>tty</sub></a></li>
+<li><a href="#orgheadline8">1.8. ln</a></li>
+<li><a href="#orgheadline9">1.9. mp3乱码</a></li>
+<li><a href="#orgheadline10">1.10. org-mode的一些技巧</a></li>
+<li><a href="#orgheadline11">1.11. send-mail</a></li>
+<li><a href="#orgheadline12">1.12. swapfile</a></li>
+<li><a href="#orgheadline13">1.13. tar</a></li>
+<li><a href="#orgheadline14">1.14. tar.txt</a></li>
+<li><a href="#orgheadline15">1.15. txt转码</a></li>
+<li><a href="#orgheadline16">1.16. vim去除所有中文字符</a></li>
+<li><a href="#orgheadline17">1.17. xinit</a></li>
+<li><a href="#orgheadline18">1.18. xinitrc</a></li>
+<li><a href="#orgheadline19">1.19. xrandr</a></li>
+<li><a href="#orgheadline20">1.20. 备份和恢复已安装软件包</a></li>
+<li><a href="#orgheadline21">1.21. 查看文件夹大小</a></li>
+<li><a href="#orgheadline22">1.22. 常用正则表达式</a></li>
+<li><a href="#orgheadline23">1.23. 挂载非系统分区</a></li>
+<li><a href="#orgheadline24">1.24. 镜像排速</a></li>
+<li><a href="#orgheadline25">1.25. 清理日志</a></li>
+<li><a href="#orgheadline26">1.26. 清理无用包</a></li>
+<li><a href="#orgheadline27">1.27. 删除文本的行</a></li>
+<li><a href="#orgheadline28">1.28. 修复引导.txt</a></li>
+<li><a href="#orgheadline29">1.29. 修改屏幕亮度</a></li>
+<li><a href="#orgheadline30">1.30. 用户</a></li>
+<li><a href="#orgheadline31">1.31. 重装所有软件</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline32" class="outline-2">
+<h2 id="orgheadline32"><span class="section-number-2">1</span> archlinux</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-orgheadline1" class="outline-3">
+<h3 id="orgheadline1"><span class="section-number-3">1.1</span> archlinux备份配置文件</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+1.新增配置文件备份<br  />
+</p>
+<div class="org-src-container">
+
+<pre class="src src-bash">sudo tar -cjvpP -T /home/spark/document/arch-backlist -f /home/data/backup/arch-backup.tar.bz2
+sudo tar -cjvpP -T filelist -f backup.tar.bz2
+tar cvpzf backup.tgz &#8211;<span style="color: #F92672;">exclude</span>=/proc &#8211;<span style="color: #F92672;">exclude</span>=/lost+found &#8211;<span style="color: #F92672;">exclude</span>=/backup.tgz &#8211;<span style="color: #F92672;">exclude</span>=/mnt &#8211;<span style="color: #F92672;">exclude</span>=/sys /
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">1.2</span> awmtt-test-awesome</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+使用 awmtt调试awesome<br  />
+awmttAUR (Awesome WM Testing Tool) 是一个基于 Xephyr 的易于使用的脚本。默认情况下，它会测试~/.config/awesome/rc.lua.test 。如果该文件不存在，它会测试当前使用的 rc.lua 。也可以指定要测试的配置文件所在路径：<br  />
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">$ awmtt start -C ~/.config/awesome/rc.lua.new
+$ awmtt stop
+$ awmtt restart
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">1.3</span> chattr</h3>
+<div class="outline-text-3" id="text-1-3">
+<blockquote>
+<p>
+chattr命令文件权限属性设置<br  />
+</p>
+
+<p>
+lsattr命令可以查看文件的第二扩展文件系统属性<br  />
+chattr命令用来改变文件属性。这项指令可改变存放在ext2文件系统上的文件或目录属性，这些属性共有以下8种模式：<br  />
+</p>
+
+<p>
+a：让文件或目录仅供附加用途；<br  />
+b：不更新文件或目录的最后存取时间；<br  />
+c：将文件或目录压缩后存放；<br  />
+d：将文件或目录排除在倾倒操作之外；<br  />
+i：不得任意更动文件或目录；<br  />
+s：保密性删除文件或目录；<br  />
+S：即时更新文件或目录；<br  />
+u：预防意外删除。<br  />
+语法<br  />
+chattr(选项)<br  />
+选项<br  />
+-R：递归处理，将指令目录下的所有文件及子目录一并处理；<br  />
+-v&lt;版本编号&gt;：设置文件或目录版本；<br  />
+-V：显示指令执行过程；<br  />
++&lt;属性&gt;：开启文件或目录的该项属性；<br  />
+-&lt;属性&gt;：关闭文件或目录的该项属性；<br  />
+=&lt;属性&gt;：指定文件或目录的该项属性。<br  />
+实例<br  />
+用chattr命令防止系统中某个关键文件被修改：<br  />
+</p>
+
+<p>
+chattr +i /etc/fstab<br  />
+然后试一下rm、mv、rename等命令操作于该文件，都是得到Operation not permitted的结果。<br  />
+</p>
+
+<p>
+让某个文件只能往里面追加内容，不能删除，一些日志文件适用于这种操作：<br  />
+</p>
+
+<p>
+chattr +a /data1/user<sub>act.log</sub><br  />
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4"><span class="section-number-3">1.4</span> chroot</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+
+<pre class="src src-bash">mount /dev/sdxY /mnt         
+mount /dev/sdxZ /mnt/boot   
+<span style="color: #A6E22E;">cd</span> /mnt
+sudo mount -t proc proc proc/
+sudo mount --rbind /sys sys/
+sudo mount --rbind /dev dev/
+sudo mount --rbind /run run/
+sudo cp /etc/resolv.conf etc/resolv.conf 
+sudo chroot /mnt /bin/bash
+<span style="color: #A6E22E;">source</span> /etc/profile
+<span style="color: #A6E22E;">source</span> ~/.bashrc
+<span style="color: #A6E22E;">export</span> <span style="color: #F92672;">PS1</span>=<span style="color: #E6DB74;">"(chroot) $PS1"</span>
+
+<span style="color: #66D9EF;">exit</span>
+<span style="color: #A6E22E;">cd</span> /
+sudo umount -R /mnt  <span style="color: #465457; font-style: italic;"># </span><span style="color: #465457; font-style: italic;">umount --recursive /location/of/new/root</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5"><span class="section-number-3">1.5</span> comm</h3>
+<div class="outline-text-3" id="text-1-5">
+<blockquote>
+<p>
+原始文件如下：<br  />
+a.txt<br  />
+d<br  />
+c<br  />
+b<br  />
+a<br  />
+</p>
+
+<p>
+b.txt<br  />
+g<br  />
+f<br  />
+b<br  />
+a<br  />
+排序处理<br  />
+sort a.txt &gt; a1.txt<br  />
+sort b.txt &gt; b1.txt<br  />
+处理结果文件如下：<br  />
+a1.txt<br  />
+a<br  />
+b<br  />
+c<br  />
+d<br  />
+</p>
+
+<p>
+b1.txt<br  />
+a<br  />
+b<br  />
+f<br  />
+g<br  />
+比较处理<br  />
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">comm</th>
+<th scope="col" class="org-left">a1.txt</th>
+<th scope="col" class="org-left">b1.txt</th>
+</tr>
+
+<tr>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-left">2</th>
+<th scope="col" class="org-left">3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">a</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">b</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">f</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">g</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">c</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">d</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<p>
+输出结果包括3列 其中第3列显示的是2个文件中都包含的内容。<br  />
+第1列显示只包含在第一个文件a.txt中的<br  />
+第2列显示只包含在第二个文件b.txt中的<br  />
+</p>
+
+<p>
+可以通过参数指定要显示的列 如：<br  />
+comm a1.txt b1.txt -12<br  />
+a<br  />
+b<br  />
+</p>
+
+<p>
+-3 显示两个文件特有的行<br  />
+-1 显示第2个文件所有行<br  />
+-2 显示第1个文件所有的行<br  />
+-12 不显示第1列和第2列，只显示第3列，即两个文件共有的行<br  />
+-13 不显示第1，3列，显示第2列，即第2个文件特有的行<br  />
+-23 不显示第2，3列，显示第1列，即第1个文件特有的行<br  />
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6"><span class="section-number-3">1.6</span> cp完全复制迁移系统</h3>
+<div class="outline-text-3" id="text-1-6">
+<div class="org-src-container">
+
+<pre class="src src-bash"><span style="color: #465457; font-style: italic;">#</span><span style="color: #465457; font-style: italic;">!/bin/</span><span style="color: #66D9EF;">bash</span>
+mkdir /mnt/old
+mkdir /mnt/new
+mount /dev/sda5 /mnt/old
+mount /dev/sda1 /mnt/new
+cp -aP /mnt/old /mnt/new
+nano /etc/fstab
+sudo update-grub
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">1.7</span> kill<sub>tty</sub></h3>
+<div class="outline-text-3" id="text-1-7">
+<ol class="org-ol">
+<li><p>
+用tty命令可以得到终端名，如：<br  />
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">tty
+/dev/tty1
+</pre>
+</div></li>
+<li><p>
+用ps -t 命令可以得到终端的进程号，如：<br  />
+$ ps -t tty1       或 ps -t /dev/tty1<br  />
+</p>
+
+<p>
+PID TTY          TIME CMD<br  />
+</p>
+
+<p>
+31419 tty1    00:00:00 bash<br  />
+</p></li>
+
+<li>用kill -9命令可以将进程杀掉，以关闭终端。前提：kill命令的执行者必须是超级用户或对tty1的进程有操作权限，否则，命令会报错：Operation not permitted，如：<br  />
+$ kill -9 31419<br  /></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">1.8</span> ln</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+ln -s <i>home/spark</i>.cache/kuwo/song ~/music/<br  />
+</p>
+
+<p>
+ln -s 源目录  新链接<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">1.9</span> mp3乱码</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+mid3iconv -e gbk *.mp3<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">1.10</span> org-mode的一些技巧</h3>
+<div class="outline-text-3" id="text-1-10">
+<blockquote>
+<p>
+用org-mode写博客<br  />
+</p>
+
+<p>
+1 配置GNU Emacs 的编码<br  />
+</p>
+
+<p>
+在配置文件里写入以下内容<br  />
+</p>
+
+<p>
+(setq current-language-environment "UTF-8")<br  />
+(setq locale-coding-system 'utf-8)<br  />
+(set-terminal-coding-system 'utf-8)<br  />
+(set-keyboard-coding-system 'utf-8)<br  />
+(set-selection-coding-system 'utf-8)<br  />
+(prefer-coding-system 'utf-8)<br  />
+2 修改GNU Emacs 的lisp包<br  />
+</p>
+
+<p>
+去掉与HOME相连的UP<br  />
+</p>
+
+<p>
+2.1 linux<br  />
+</p>
+
+<p>
+我的系统是slackware 14.1，源码编译安装最新的emacs24.5前，修改lisp/org/ox-html.el，找到‘，删删除’UP‘，用M-x byte-compile-file编译成elc文件。<br  />
+</p>
+
+<p>
+2.2 Windows<br  />
+</p>
+
+<p>
+打开 lisp/org/org-html.el lisp/org/ox-html.el 修改org-export-html-home/up-format<br  />
+</p>
+
+<p>
+(defcustom org-export-html-home/up-format<br  />
+  "&lt;div id=\"org-div-home-and-up\" style=\"text-align:right;font-size:100%%;white-space:nowrap;\"&gt;<br  />
+&lt;a accesskey=\"H\" href=\"%s\"&gt; HOME &lt;/a&gt;<br  />
+&lt;/div&gt;"<br  />
+  "Snippet used to insert the HOME and UP links.<br  />
+This is a format string, the first %s will receive the UP link,<br  />
+the second the HOME link.  If both `org-export-html-link-up' and<br  />
+`org-export-html-link-home' are empty, the entire snippet will be<br  />
+ignored."<br  />
+  :group 'org-export-html<br  />
+  :type 'string)<br  />
+因为GNU Emacs 默认会读elc文件，所以修改好后，用M-x byte-compile-file 编译一下。<br  />
+</p>
+
+<p>
+3 去掉Validate XHTML 1.0<br  />
+</p>
+
+<p>
+在配置文件里写入<br  />
+</p>
+
+<p>
+(setq org-export-html-validation-link nil)<br  />
+在org-mode 8 中更改为org-html-validation-link<br  />
+</p>
+
+<p>
+4 介绍模板文件<br  />
+</p>
+
+<p>
+4.1 Google Analytisc<br  />
+</p>
+
+<p>
+Google Analytisc 代码用#+HTML<sub>HEAD逐行写在内容前面</sub>。<br  />
+</p>
+
+<p>
+4.2 Disqus<br  />
+</p>
+
+<p>
+Disqus 代码用#+BEGIN<sub>HTML</sub> #+END<sub>HTML</sub> 写在内容后面。<br  />
+</p>
+
+<p>
+4.3 网页<br  />
+</p>
+
+<p>
+4.3.1 CSS 文件<br  />
+</p>
+
+<p>
+CSS 代码参考这个<br  />
+</p>
+
+<p>
+&lt;link rel="stylesheet" type="text/css" href="/css/worg.css" /&gt;<br  />
+前面加#+HTML<sub>HEAD</sub> 加在内容前面。<br  />
+</p>
+
+<p>
+4.3.2 favicon<br  />
+</p>
+
+<p>
+参考<br  />
+</p>
+
+<p>
+&lt;LINK REL="SHORTCUT ICON" HREF="/IMAGES/FAVICON.ICO"/&gt;<br  />
+4.3.3 DESCRIPTION<br  />
+</p>
+
+<p>
+用#+DESCRIPTION: 添加<br  />
+</p>
+
+<p>
+4.3.4 网页标题<br  />
+</p>
+
+<p>
+用#+TITLE: 添加<br  />
+</p>
+
+<p>
+4.3.5 主页<br  />
+</p>
+
+<p>
+用#+LINK<sub>HOME</sub>: 添加<br  />
+</p>
+
+<p>
+4.4 文档元数据<br  />
+</p>
+
+<p>
+下面的内容都是ORG-MODE 默认开启，而我要关闭它们。这节的配置都写在#+OPTIONS: 后面<br  />
+</p>
+
+<p>
+4.4.1 取消目录里各级标题前的数字<br  />
+</p>
+
+<p>
+NUM:NIL<br  />
+</p>
+
+<p>
+4.4.2 取消生成工具<br  />
+</p>
+
+<p>
+CREATOR:NIL<br  />
+</p>
+
+<p>
+4.4.3 取消作者<br  />
+</p>
+
+<p>
+AUTHOR:NIL<br  />
+</p>
+
+<p>
+4.4.4 取消时间<br  />
+</p>
+
+<p>
+TIMESTAMP:NIL<br  />
+</p>
+
+<p>
+4.4.5 取消目录<br  />
+</p>
+
+<p>
+TOC:NIL<br  />
+</p>
+
+<p>
+4.4.6 取消TEX的转义<br  />
+</p>
+
+<p>
+_ 会使得后面的内容变成下标，加上下面的选项可以避免。 ^:NIL<br  />
+</p>
+
+<p>
+4.5 内容元数据<br  />
+</p>
+
+<p>
+4.5.1 加源代码<br  />
+</p>
+
+<p>
+用#+BEGIN<sub>SRC</sub> C -N … #+END<sub>SRC</sub>，C可以换成别的语言，-N显示行号。<br  />
+</p>
+
+<p>
+4.5.2 内容居中<br  />
+</p>
+
+<p>
+用#+BEGIN<sub>CENTER</sub> … #+END<sub>CENTER</sub><br  />
+</p>
+
+<p>
+4.5.3 插入HTML<br  />
+</p>
+
+<p>
+用#+BEGIN<sub>HTML</sub> … #+END<sub>HTML</sub><br  />
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">1.11</span> send-mail</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+发送邮件<br  />
+</p>
+
+<p>
+echo "测试test" | mutt -s "test" goodaniu@163.com<br  />
+</p>
+
+<p>
+直接发送，不会打开vim和邮件发送客户端<br  />
+</p>
+
+<p>
+mutt goodaniu@163.com -s 'test send mail'<br  />
+</p>
+
+<p>
+会打开vim编辑器和邮件客户端，需要手工输入一些控制命令<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">1.12</span> swapfile</h3>
+<div class="outline-text-3" id="text-1-12">
+<div class="org-src-container">
+
+<pre class="src src-bash">fallocate -l 1G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+<span style="color: #A6E22E;">echo</span>  <span style="color: #E6DB74;">"/swapfile                    none        swap        defaults    0 0"</span> &gt;&gt;/etc/fstab
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">1.13</span> tar</h3>
+<div class="outline-text-3" id="text-1-13">
+<blockquote>
+<p>
+tar命令文件压缩与解压<br  />
+</p>
+
+<p>
+其实最简单的使用 tar 就只要记忆底下的方式即可：<br  />
+</p>
+
+<p>
+压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称<br  />
+查　询：tar -jtv -f filename.tar.bz2<br  />
+解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录<br  />
+</p>
+
+
+<p>
+tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。<br  />
+</p>
+
+<p>
+首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。<br  />
+</p>
+
+<p>
+为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。<br  />
+</p>
+
+<p>
+语法<br  />
+tar(选项)(参数)<br  />
+选项<br  />
+-A或&#x2013;catenate：新增文件到以存在的备份文件；<br  />
+-B：设置区块大小；<br  />
+-c或&#x2013;create：建立新的备份文件；<br  />
+-C &lt;目录&gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。<br  />
+-d：记录文件的差别；<br  />
+-x或&#x2013;extract或&#x2013;get：从备份文件中还原文件；<br  />
+-t或&#x2013;list：列出备份文件的内容；<br  />
+-z或&#x2013;gzip或&#x2013;ungzip：通过gzip指令处理备份文件；<br  />
+-Z或&#x2013;compress或&#x2013;uncompress：通过compress指令处理备份文件；<br  />
+-f&lt;备份文件&gt;或&#x2013;file=&lt;备份文件&gt;：指定备份文件；<br  />
+-v或&#x2013;verbose：显示指令执行过程；<br  />
+-r：添加文件到已经压缩的文件；<br  />
+-u：添加改变了和现有的文件到已经存在的压缩文件；<br  />
+-j：支持bzip2解压文件；<br  />
+-v：显示操作过程；<br  />
+-l：文件系统边界设置；<br  />
+-k：保留原有文件不覆盖；<br  />
+-m：保留文件不被覆盖；<br  />
+-w：确认压缩文件的正确性；<br  />
+-p或&#x2013;same-permissions：用原来的文件权限还原文件；<br  />
+-P或&#x2013;absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；<br  />
+-N &lt;日期格式&gt; 或 &#x2013;newer=&lt;日期时间&gt;：只将较指定日期更新的文件保存到备份文件里；<br  />
+&#x2013;exclude=&lt;范本样式&gt;：排除符合范本样式的文件。<br  />
+参数<br  />
+文件或目录：指定要打包的文件或目录列表。<br  />
+</p>
+
+<p>
+实例<br  />
+将文件全部打包成tar包：<br  />
+</p>
+
+<p>
+tar -cvf log.tar log2012.log    仅打包，不压缩！<br  />
+tar -zcvf log.tar.gz log2012.log   打包后，以 gzip 压缩<br  />
+tar -jcvf log.tar.bz2 log2012.log  打包后，以 bzip2 压缩<br  />
+在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。<br  />
+</p>
+
+<p>
+查阅上述tar包内有哪些文件：<br  />
+</p>
+
+<p>
+tar -ztvf log.tar.gz<br  />
+由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。<br  />
+</p>
+
+<p>
+将tar包解压缩：<br  />
+</p>
+
+<p>
+tar -zxvf /opt/soft/test/log.tar.gz<br  />
+在预设的情况下，我们可以将压缩档在任何地方解开的<br  />
+</p>
+
+<p>
+只将tar内的部分文件解压出来：<br  />
+</p>
+
+<p>
+tar -zxvf /opt/soft/test/log30.tar.gz log2013.log<br  />
+我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！<br  />
+</p>
+
+<p>
+文件备份下来，并且保存其权限：<br  />
+</p>
+
+<p>
+tar -zcvpf log31.tar.gz log2014.log log2015.log log2016.log<br  />
+这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。<br  />
+</p>
+
+<p>
+在文件夹当中，比某个日期新的文件才备份：<br  />
+</p>
+
+<p>
+tar -N "2012/11/13" -zcvf log17.tar.gz test<br  />
+备份文件夹内容是排除部分文件：<br  />
+</p>
+
+<p>
+tar &#x2013;exclude scf/service -zcvf scf.tar.gz scf/*<br  />
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">1.14</span> tar.txt</h3>
+<div class="outline-text-3" id="text-1-14">
+<blockquote>
+<p>
+﻿tar命令文件压缩与解压<br  />
+</p>
+
+<p>
+其实最简单的使用 tar 就只要记忆底下的方式即可：<br  />
+压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称<br  />
+查　询：tar -jtv -f filename.tar.bz2<br  />
+解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录<br  />
+</p>
+
+<p>
+-c: 建立压缩档案<br  />
+-x：解压<br  />
+-t：查看内容<br  />
+-r：向压缩归档文件末尾追加文件<br  />
+-u：更新原压缩包中的文件<br  />
+这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。<br  />
+</p>
+
+<p>
+-z：有gzip属性的<br  />
+-j：有bz2属性的<br  />
+-Z：有compress属性的<br  />
+-v：显示所有过程<br  />
+-O：将文件解开到标准输出<br  />
+-p或&#x2013;same-permissions：用原来的文件权限还原文件；<br  />
+</p>
+
+<p>
+下面的参数-f是必须的<br  />
+-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。<br  />
+ tar -cf all.tar *.jpg<br  />
+这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。<br  />
+ tar -rf all.tar *.gif<br  />
+这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。<br  />
+</p>
+
+<p>
+ tar -uf all.tar logo.gif<br  />
+这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。<br  />
+</p>
+
+<p>
+ tar -tf all.tar<br  />
+这条命令是列出all.tar包中所有文件，-t是列出文件的意思<br  />
+</p>
+
+<p>
+ tar -xf all.tar<br  />
+这条命令是解出all.tar包中所有文件，-t是解开的意思<br  />
+压缩<br  />
+tar -cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg <br  />
+tar -czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz<br  />
+ tar -cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2<br  />
+tar -cZf jpg.tar.Z *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z<br  />
+rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for linux<br  />
+zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux<br  />
+解压<br  />
+tar -xvf file.tar //解压 tar包<br  />
+tar -xzvf file.tar.gz //解压tar.gz<br  />
+tar -xjvf file.tar.bz2   //解压 tar.bz2<br  />
+tar -xZvf file.tar.Z   //解压tar.Z<br  />
+unrar e file.rar //解压rar<br  />
+unzip file.zip //解压zip<br  />
+总结<br  />
+1、*.tar 用 tar -xvf 解压<br  />
+2、*.gz 用 gzip -d或者gunzip 解压<br  />
+3、*.tar.gz和*.tgz 用 tar -xzf 解压<br  />
+4、*.bz2 用 bzip2 -d或者用bunzip2 解压<br  />
+5、*.tar.bz2用tar -xjf 解压<br  />
+6、*.Z 用 uncompress 解压<br  />
+7、*.tar.Z 用tar -xZf 解压<br  />
+8、*.rar 用 unrar e解压<br  />
+9、*.zip 用 unzip 解压<br  />
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">1.15</span> txt转码</h3>
+<div class="outline-text-3" id="text-1-15">
+<p>
+iconv -f gb18030 -t utf-8 sanguozhi.txt &gt;sgz.txt<br  />
+</p>
+
+<p>
+iconv -f CP850 -t UTF-8 sanguozhi.txt &gt;sgz.txt<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><span class="section-number-3">1.16</span> vim去除所有中文字符</h3>
+<div class="outline-text-3" id="text-1-16">
+<p>
+:%s/\v[^\x00-\xff]+//g<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">1.17</span> xinit</h3>
+<div class="outline-text-3" id="text-1-17">
+<blockquote>
+<p>
+~/.xinitrc<br  />
+&#x2026;<br  />
+</p>
+
+<p>
+ Here Xfce is kept as default<br  />
+session=${1:-xfce}<br  />
+</p>
+
+<p>
+case $session in<br  />
+    awesome           ) exec awesome;;<br  />
+    bspwm             ) exec bspwm;;<br  />
+    catwm             ) exec catwm;;<br  />
+    cinnamon          ) exec cinnamon-session;;<br  />
+    dwm               ) exec dwm;;<br  />
+    enlightenment     ) exec enlightenment<sub>start</sub>;;<br  />
+    ede               ) exec startede;;<br  />
+    fluxbox           ) exec startfluxbox;;<br  />
+    gnome             ) exec gnome-session;;<br  />
+    gnome-classic     ) exec gnome-session &#x2013;session=gnome-classic;;<br  />
+    i3|i3wm           ) exec i3;;<br  />
+    icewm             ) exec icewm-session;;<br  />
+    jwm               ) exec jwm;;<br  />
+    kde               ) exec startkde;;<br  />
+    mate              ) exec mate-session;;<br  />
+    monster|monsterwm ) exec monsterwm;;<br  />
+    notion            ) exec notion;;<br  />
+    openbox           ) exec openbox-session;;<br  />
+    unity             ) exec unity;;<br  />
+    xfce|xfce4        ) exec startxfce4;;<br  />
+    xmonad            ) exec xmonad;;<br  />
+    *) exec $1;;<br  />
+esac<br  />
+</p>
+</blockquote>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">$ xinit
+$ xinit gnome
+$ xinit kde
+$ xinit wmaker
+
+$ startx
+$ startx ~/.xinitrc gnome
+$ startx ~/.xinitrc kde
+$ startx ~/.xinitrc wmaker
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">1.18</span> xinitrc</h3>
+<div class="outline-text-3" id="text-1-18">
+<blockquote>
+<p>
+session=${1:-xfce}<br  />
+</p>
+
+<p>
+case $session in<br  />
+    chromium         ) exec chromium;;<br  />
+    awesome           ) exec awesome;;<br  />
+    bspwm             ) exec bspwm;;<br  />
+    catwm             ) exec catwm;;<br  />
+    cinnamon          ) exec cinnamon-session;;<br  />
+    dwm               ) exec dwm;;<br  />
+    enlightenment     ) exec enlightenment<sub>start</sub>;;<br  />
+    ede               ) exec startede;;<br  />
+    fluxbox           ) exec startfluxbox;;<br  />
+    gnome             ) exec gnome-session;;<br  />
+    gnome-classic     ) exec gnome-session &#x2013;session=gnome-classic;;<br  />
+    i3|i3wm           ) exec i3;;<br  />
+    icewm             ) exec icewm-session;;<br  />
+    jwm               ) exec jwm;;<br  />
+    kde               ) exec startkde;;<br  />
+    mate              ) exec mate-session;;<br  />
+    monster|monsterwm ) exec monsterwm;;<br  />
+    notion            ) exec notion;;<br  />
+    openbox           ) exec openbox-session;;<br  />
+    unity             ) exec unity;;<br  />
+    xfce|xfce4        ) exec startxfce4;;<br  />
+    xmonad            ) exec xmonad;;<br  />
+    *) exec $1;;<br  />
+esac<br  />
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><span class="section-number-3">1.19</span> xrandr</h3>
+<div class="outline-text-3" id="text-1-19">
+<p>
+archlinux 下显示器管理利器 xrandr<br  />
+</p>
+
+<p>
+xrandr 显示可以识别到的显示器<br  />
+</p>
+
+<p>
+xrandr &#x2013;output VGA &#x2013;auto 当前桌面会复制到VGA上面，此时执行xrandr会看到有了VGA-0<br  />
+</p>
+
+<p>
+扩展桌面 xrandr -&#x2014;output VGA-0 &#x2013;auto &#x2013;left-of LVDS<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">1.20</span> 备份和恢复已安装软件包</h3>
+<div class="outline-text-3" id="text-1-20">
+<blockquote>
+<p>
+一、备份和恢复已安装软件包<br  />
+定期备份软件包是个好习惯。万一系统出了大问题，需要重装，就可以利用备份的软件包恢复到原先的系统。<br  />
+</p>
+
+<p>
+第一步，生成系统上安装的非本地（即从官方仓库获取的）软件包列表：<br  />
+ $ comm -23 &lt;(pacman -Qeq|sort) &lt;(pacman -Qmq|sort) &gt; pkglist<br  />
+把生成的pkglist存储在一个安全的地方，比如U盘，或者gist.github.com、evernote、dropbox之类的文本储存网站。<br  />
+今后重装系统时，把pkglist复制到新系统。<br  />
+使用如下命令安装所有软件包：<br  />
+ $ pacman -S $(&lt; pkglist)<br  />
+要是备份的软件包列表包含非官方软件包（从AUR或其他什么地方下载的），就得使用下面这个吓人的命令了，不然pacman会出错：<br  />
+</p>
+
+<p>
+$ pacman -S &#x2013;needed $(diff &lt;(cat badpkglist|sort) &lt;(diff &lt;(cat badpkglist|sort) &lt;(pacman -Slq|sort)|grep \&lt;|cut -f2 -d' ')|grep \&lt;|cut -f2 -d' ')<br  />
+解释：<br  />
+</p>
+
+<p>
+pacman -Slq列出所有可以安装的软件包。由于输出是按照来源仓库排序的，需要再调用sort排序。<br  />
+排序是为diff命令比对列表做准备。<br  />
+第一个diff返回所有无法安装的软件包；第二个返回所有可以安装的软件包。<br  />
+&#x2013;needed表示跳过已安装软件包。<br  />
+可以接着用yaourt恢复从AUR获取的软件包（不推荐）：<br  />
+</p>
+
+<p>
+$ yaourt -S &#x2013;noconfirm $(diff &lt;(cat badpkglist|sort) &lt;(pacman -Slq|sort) |grep \&lt;|cut -f2 -d' ')<br  />
+最后，还可以卸载掉新系统上安装的、但之前系统并未安装的软件包。 警告：务必小心使用，仔细查看pacman输出，避免悲剧。<br  />
+</p>
+
+<p>
+$ pacman -Rsu $(diff &lt;(cat badpkglist|sort) &lt;(pacman -Qq|sort) | grep \&gt;|cut -f2 -d' ')<br  />
+</p>
+
+<p>
+二、列出所有不属于base或base-devel的已安装软件包<br  />
+下列命令输出所有不属于base或base-devel软件包组的已安装软件包。这些软件包一般都是用户自己安装的：<br  />
+##############################<br  />
+##############################<br  />
+##############################<br  />
+</p>
+
+<p>
+comm -23 &lt;(pacman -Qeq|sort) &lt;(pacman -Qgq base base-devel|sort)  &gt;pkglist<br  />
+comm -12 &lt;(comm -23 &lt;(pacman -Qeq|sort) &lt;(pacman -Qmq|sort)) &lt;(sort pkglist) | pacman -S -           # paclist<br  />
+comm -13 &lt;(comm -23 &lt;(pacman -Qeq|sort) &lt;(pacman -Qmq|sort)) &lt;(sort pkglist) | yaourt -S -              #aurlist<br  />
+comm -12 &lt;(comm -23 &lt;(pacman -Qdq|sort) &lt;(pacman -Qmq|sort)) &lt;(sort pkglist) | pacman -S &#x2013;asdeps -      #asdepslist<br  />
+##############################<br  />
+##############################<br  />
+##############################<br  />
+</p>
+
+<p>
+三、重新安装所有软件包<br  />
+</p>
+
+<p>
+这要是你的系统遭到了大规模破坏（比如rm -rf什么的），可以通过pacman重新安装所有软件包来挽救。<br  />
+</p>
+
+<p>
+如果没有安装外来软件包（比如来自AUR的），使用如下命令即可：<br  />
+</p>
+
+<p>
+$ pacman -Qeq | pacman -S -<br  />
+$ pacman -Qdq | pacman -S &#x2013;asdeps -<br  />
+如果安装了外来软件包，使用上面的命令会出错。下面的命令先生成所有软件包列表，再用pacman -Qmq剔除外来软件包，即重新安装所有仓库中可以找到的软件包，同时保留依赖安装、手动安装标志：<br  />
+</p>
+
+<p>
+$ comm -23 &lt;(pacman -Qeq) &lt;(pacman -Qmq) | pacman -S -<br  />
+$ comm -23 &lt;(pacman -Qdq) &lt;(pacman -Qmq) | pacman -S &#x2013;asdeps -<br  />
+</p>
+
+
+<p>
+1.Recreate a package from the file system<br  />
+Keeping a list of explicitly installed packages can be useful to speed up installation on a new system:<br  />
+</p>
+
+<p>
+$ pacman -Qqe &gt; pkglist.txt<br  />
+</p>
+
+<p>
+Note: If you used -Qqet, when reinstalling the list all the non-top-level packages would be set as dependencies.<br  />
+To install packages from the list backup, run:<br  />
+</p>
+
+<p>
+    $ pacman -S - &lt; pkglist.txt<br  />
+Tip: Use     comm -13 &lt;(pacman -Qqdt | sort) &lt;(pacman -Qqdtt | sort) &gt; optdeplist.txt     to also create a list of the installed optional dependencies which can be reinstalled with &#x2013;asdeps.<br  />
+In case the list includes foreign packages, such as AUR packages, remove them first:<br  />
+</p>
+
+<p>
+    $ pacman -S $(comm -12 &lt;(pacman -Slq | sort) &lt;(sort pkglist.txt))<br  />
+To remove all the packages on your system that are not mentioned in the list:<br  />
+</p>
+
+<p>
+$ pacman -Rsu $(comm -23 &lt;(pacman -Qq | sort) &lt;(sort pkglist.txt))<br  />
+</p>
+
+<p>
+2.Reinstalling all packages<br  />
+To reinstall all native packages, use:<br  />
+</p>
+
+<p>
+    $ pacman -Qnq | pacman -S -<br  />
+Foreign (AUR) packages must be reinstalled separately; you can list them with     pacman -Qmq.<br  />
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">1.21</span> 查看文件夹大小</h3>
+<div class="outline-text-3" id="text-1-21">
+<div class="org-src-container">
+
+<pre class="src src-bash">df -h   <span style="color: #465457; font-style: italic;">#</span><span style="color: #465457; font-style: italic;">&#26597;&#30475;&#25346;&#36733;&#20449;&#24687;</span>
+du -sh  <span style="color: #465457; font-style: italic;">#</span><span style="color: #465457; font-style: italic;">&#24403;&#21069;&#30446;&#24405;</span>
+du -sh *    sort -n &#32479;&#35745;&#24403;&#21069;&#25991;&#20214;&#22841;(&#30446;&#24405;)&#22823;&#23567;&#65292;&#24182;&#25353;&#25991;&#20214;&#22823;&#23567;&#25490;&#24207;
+du -skh /video
+sudo du -skh /var
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22"><span class="section-number-3">1.22</span> 常用正则表达式</h3>
+<div class="outline-text-3" id="text-1-22">
+<div class="org-src-container">
+
+<pre class="src src-bash"><span class="linenr"> 1: </span>&#24120;&#29992;&#27491;&#21017;&#34920;&#36798;&#24335;
+<span class="linenr"> 2: </span>&#19968;&#12289;&#26657;&#39564;&#25968;&#23383;&#30340;&#34920;&#36798;&#24335;
+<span class="linenr"> 3: </span>&#25968;&#23383;&#65306;^[0-9]*$
+<span class="linenr"> 4: </span>n&#20301;&#30340;&#25968;&#23383;&#65306;^\d{n}$
+<span class="linenr"> 5: </span>&#33267;&#23569;n&#20301;&#30340;&#25968;&#23383;&#65306;^\d{n,}$
+<span class="linenr"> 6: </span>m-n&#20301;&#30340;&#25968;&#23383;&#65306;^\d{m,n}$
+<span class="linenr"> 7: </span>&#38646;&#21644;&#38750;&#38646;&#24320;&#22836;&#30340;&#25968;&#23383;&#65306;^(0|[1-9][0-9]*)$
+<span class="linenr"> 8: </span>&#38750;&#38646;&#24320;&#22836;&#30340;&#26368;&#22810;&#24102;&#20004;&#20301;&#23567;&#25968;&#30340;&#25968;&#23383;&#65306;^([1-9][0-9]*)+(.[0-9]{1,2})?$
+<span class="linenr"> 9: </span>&#24102;1-2&#20301;&#23567;&#25968;&#30340;&#27491;&#25968;&#25110;&#36127;&#25968;&#65306;^(<span style="color: #E6DB74;">\-</span>)?\d+(<span style="color: #E6DB74;">\.</span>\d{1,2})?$
+<span class="linenr">10: </span>&#27491;&#25968;&#12289;&#36127;&#25968;&#12289;&#21644;&#23567;&#25968;&#65306;^(<span style="color: #E6DB74;">\-</span>|<span style="color: #E6DB74;">\+</span>)?\d+(<span style="color: #E6DB74;">\.</span>\d+)?$
+<span class="linenr">11: </span>&#26377;&#20004;&#20301;&#23567;&#25968;&#30340;&#27491;&#23454;&#25968;&#65306;^[0-9]+(<span style="color: #E6DB74;">\.</span>[0-9]{2})?$
+<span class="linenr">12: </span>&#26377;1~3&#20301;&#23567;&#25968;&#30340;&#27491;&#23454;&#25968;&#65306;^[0-9]+(<span style="color: #E6DB74;">\.</span>[0-9]{1,3})?$
+<span class="linenr">13: </span>&#38750;&#38646;&#30340;&#27491;&#25972;&#25968;&#65306;^[1-9]\d*$ &#25110; ^([1-9][0-9]*){1,3}$ &#25110; ^<span style="color: #E6DB74;">\+</span>?[1-9][0-9]*$
+<span class="linenr">14: </span>&#38750;&#38646;&#30340;&#36127;&#25972;&#25968;&#65306;^<span style="color: #E6DB74;">\-</span>[1-9][]0-9<span style="color: #E6DB74;">"*$ &#25110; ^-[1-9]\d*$</span>
+<span class="linenr">15: </span><span style="color: #E6DB74;">&#38750;&#36127;&#25972;&#25968;&#65306;^\d+$ &#25110; ^[1-9]\d*|0$</span>
+<span class="linenr">16: </span><span style="color: #E6DB74;">&#38750;&#27491;&#25972;&#25968;&#65306;^-[1-9]\d*|0$ &#25110; ^((-\d+)|(0+))$</span>
+<span class="linenr">17: </span><span style="color: #E6DB74;">&#38750;&#36127;&#28014;&#28857;&#25968;&#65306;^\d+(\.\d+)?$ &#25110; ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$</span>
+<span class="linenr">18: </span><span style="color: #E6DB74;">&#38750;&#27491;&#28014;&#28857;&#25968;&#65306;^((-\d+(\.\d+)?)|(0+(\.0+)?))$ &#25110; ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$</span>
+<span class="linenr">19: </span><span style="color: #E6DB74;">&#27491;&#28014;&#28857;&#25968;&#65306;^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ &#25110; ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$</span>
+<span class="linenr">20: </span><span style="color: #E6DB74;">&#36127;&#28014;&#28857;&#25968;&#65306;^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ &#25110; ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$</span>
+<span class="linenr">21: </span><span style="color: #E6DB74;">&#28014;&#28857;&#25968;&#65306;^(-?\d+)(\.\d+)?$ &#25110; ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$</span>
+<span class="linenr">22: </span><span style="color: #E6DB74;">&#26657;&#39564;&#23383;&#31526;&#30340;&#34920;&#36798;&#24335;</span>
+<span class="linenr">23: </span><span style="color: #E6DB74;">&#27721;&#23383;&#65306;^[\u4e00-\u9fa5]{0,}$</span>
+<span class="linenr">24: </span><span style="color: #E6DB74;">&#33521;&#25991;&#21644;&#25968;&#23383;&#65306;^[A-Za-z0-9]+$ &#25110; ^[A-Za-z0-9]{4,40}$</span>
+<span class="linenr">25: </span><span style="color: #E6DB74;">&#38271;&#24230;&#20026;3-20&#30340;&#25152;&#26377;&#23383;&#31526;&#65306;^.{3,20}$</span>
+<span class="linenr">26: </span><span style="color: #E6DB74;">&#30001;26&#20010;&#33521;&#25991;&#23383;&#27597;&#32452;&#25104;&#30340;&#23383;&#31526;&#20018;&#65306;^[A-Za-z]+$</span>
+<span class="linenr">27: </span><span style="color: #E6DB74;">&#30001;26&#20010;&#22823;&#20889;&#33521;&#25991;&#23383;&#27597;&#32452;&#25104;&#30340;&#23383;&#31526;&#20018;&#65306;^[A-Z]+$</span>
+<span class="linenr">28: </span><span style="color: #E6DB74;">&#30001;26&#20010;&#23567;&#20889;&#33521;&#25991;&#23383;&#27597;&#32452;&#25104;&#30340;&#23383;&#31526;&#20018;&#65306;^[a-z]+$</span>
+<span class="linenr">29: </span><span style="color: #E6DB74;">&#30001;&#25968;&#23383;&#21644;26&#20010;&#33521;&#25991;&#23383;&#27597;&#32452;&#25104;&#30340;&#23383;&#31526;&#20018;&#65306;^[A-Za-z0-9]+$</span>
+<span class="linenr">30: </span><span style="color: #E6DB74;">&#30001;&#25968;&#23383;&#12289;26&#20010;&#33521;&#25991;&#23383;&#27597;&#25110;&#32773;&#19979;&#21010;&#32447;&#32452;&#25104;&#30340;&#23383;&#31526;&#20018;&#65306;^\w+$ &#25110; ^\w{3,20}$</span>
+<span class="linenr">31: </span><span style="color: #E6DB74;">&#20013;&#25991;&#12289;&#33521;&#25991;&#12289;&#25968;&#23383;&#21253;&#25324;&#19979;&#21010;&#32447;&#65306;^[\u4E00-\u9FA5A-Za-z0-9_]+$</span>
+<span class="linenr">32: </span><span style="color: #E6DB74;">&#20013;&#25991;&#12289;&#33521;&#25991;&#12289;&#25968;&#23383;&#20294;&#19981;&#21253;&#25324;&#19979;&#21010;&#32447;&#31561;&#31526;&#21495;&#65306;^[\u4E00-\u9FA5A-Za-z0-9]+$ &#25110; ^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$</span>
+<span class="linenr">33: </span><span style="color: #E6DB74;">&#21487;&#20197;&#36755;&#20837;&#21547;&#26377;^%&amp;',;=?$\"&#31561;&#23383;&#31526;&#65306;[^%&amp;',;=?$\x22]+</span>
+<span class="linenr">34: </span><span style="color: #E6DB74;">&#31105;&#27490;&#36755;&#20837;&#21547;&#26377;~&#30340;&#23383;&#31526;&#65306;[^~\x22]+</span>
+<span class="linenr">35: </span><span style="color: #E6DB74;">&#19977;&#12289;&#29305;&#27530;&#38656;&#27714;&#34920;&#36798;&#24335;</span>
+<span class="linenr">36: </span><span style="color: #E6DB74;">Email&#22320;&#22336;&#65306;^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$</span>
+<span class="linenr">37: </span><span style="color: #E6DB74;">&#22495;&#21517;&#65306;[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?</span>
+<span class="linenr">38: </span><span style="color: #E6DB74;">InternetURL&#65306;[a-zA-z]+://[^\s]* &#25110; ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*)?$</span>
+<span class="linenr">39: </span><span style="color: #E6DB74;">&#25163;&#26426;&#21495;&#30721;&#65306;^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$</span>
+<span class="linenr">40: </span><span style="color: #E6DB74;">&#30005;&#35805;&#21495;&#30721;("</span>XXX-XXXXXXX<span style="color: #E6DB74;">"&#12289;"</span>XXXX-XXXXXXXX<span style="color: #E6DB74;">"&#12289;"</span>XXX-XXXXXXX<span style="color: #E6DB74;">"&#12289;"</span>XXX-XXXXXXXX<span style="color: #E6DB74;">"&#12289;"</span>XXXXXXX<span style="color: #E6DB74;">"&#21644;"</span>XXXXXXXX)&#65306;^(<span style="color: #E6DB74;">\(</span>\d{3,4}-)|\d{3.4}-)?\d{7,8}$
+<span class="linenr">41: </span><span style="color: #F92672; font-style: italic;">&#22269;&#20869;&#30005;&#35805;&#21495;&#30721;</span>(0511-4405222&#12289;021-87888822)&#65306;\d{3}-\d{8}|\d{4}-\d{7}
+<span class="linenr">42: </span>&#30005;&#35805;&#21495;&#30721;&#27491;&#21017;&#34920;&#36798;&#24335;&#65288;&#25903;&#25345;&#25163;&#26426;&#21495;&#30721;&#65292;3-4&#20301;&#21306;&#21495;&#65292;7-8&#20301;&#30452;&#25773;&#21495;&#30721;&#65292;1&#65293;4&#20301;&#20998;&#26426;&#21495;&#65289;: ((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)
+<span class="linenr">43: </span><span style="color: #F92672; font-style: italic;">&#36523;&#20221;&#35777;&#21495;</span>(15&#20301;&#12289;18&#20301;&#25968;&#23383;)&#65292;&#26368;&#21518;&#19968;&#20301;&#26159;&#26657;&#39564;&#20301;&#65292;&#21487;&#33021;&#20026;&#25968;&#23383;&#25110;&#23383;&#31526;X&#65306;(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)
+<span class="linenr">44: </span><span style="color: #F92672; font-style: italic;">&#24080;&#21495;&#26159;&#21542;&#21512;&#27861;</span>(&#23383;&#27597;&#24320;&#22836;&#65292;&#20801;&#35768;5-16&#23383;&#33410;&#65292;&#20801;&#35768;&#23383;&#27597;&#25968;&#23383;&#19979;&#21010;&#32447;)&#65306;^[a-zA-Z][a-zA-Z0-9_]{4,15}$
+<span class="linenr">45: </span><span style="color: #F92672; font-style: italic;">&#23494;&#30721;</span>(&#20197;&#23383;&#27597;&#24320;&#22836;&#65292;&#38271;&#24230;&#22312;6~18&#20043;&#38388;&#65292;&#21482;&#33021;&#21253;&#21547;&#23383;&#27597;&#12289;&#25968;&#23383;&#21644;&#19979;&#21010;&#32447;)&#65306;^[a-zA-Z]\w{5,17}$
+<span class="linenr">46: </span><span style="color: #F92672; font-style: italic;">&#24378;&#23494;&#30721;</span>(&#24517;&#39035;&#21253;&#21547;&#22823;&#23567;&#20889;&#23383;&#27597;&#21644;&#25968;&#23383;&#30340;&#32452;&#21512;&#65292;&#19981;&#33021;&#20351;&#29992;&#29305;&#27530;&#23383;&#31526;&#65292;&#38271;&#24230;&#22312;8-10&#20043;&#38388;)&#65306;^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$
+<span class="linenr">47: </span>&#26085;&#26399;&#26684;&#24335;&#65306;^\d{4}-\d{1,2}-\d{1,2}
+<span class="linenr">48: </span><span style="color: #F92672; font-style: italic;">&#19968;&#24180;&#30340;12&#20010;&#26376;</span>(01&#65374;09&#21644;1&#65374;12)&#65306;^(0?[1-9]|1[0-2])$
+<span class="linenr">49: </span><span style="color: #F92672; font-style: italic;">&#19968;&#20010;&#26376;&#30340;31&#22825;</span>(01&#65374;09&#21644;1&#65374;31)&#65306;^((0?[1-9])|((1|2)[0-9])|30|31)$
+<span class="linenr">50: </span>&#38065;&#30340;&#36755;&#20837;&#26684;&#24335;&#65306;
+<span class="linenr">51: </span>&#26377;&#22235;&#31181;&#38065;&#30340;&#34920;&#31034;&#24418;&#24335;&#25105;&#20204;&#21487;&#20197;&#25509;&#21463;:<span style="color: #E6DB74;">"10000.00"</span> &#21644; <span style="color: #E6DB74;">"10,000.00"</span>, &#21644;&#27809;&#26377; <span style="color: #E6DB74;">"&#20998;"</span> &#30340; <span style="color: #E6DB74;">"10000"</span> &#21644; <span style="color: #E6DB74;">"10,000"</span>&#65306;^[1-9][0-9]*$
+<span class="linenr">52: </span>&#36825;&#34920;&#31034;&#20219;&#24847;&#19968;&#20010;&#19981;&#20197;0&#24320;&#22836;&#30340;&#25968;&#23383;,&#20294;&#26159;,&#36825;&#20063;&#24847;&#21619;&#30528;&#19968;&#20010;&#23383;&#31526;<span style="color: #E6DB74;">"0"</span>&#19981;&#36890;&#36807;,&#25152;&#20197;&#25105;&#20204;&#37319;&#29992;&#19979;&#38754;&#30340;&#24418;&#24335;&#65306;^(0|[1-9][0-9]*)$
+<span class="linenr">53: </span>&#19968;&#20010;0&#25110;&#32773;&#19968;&#20010;&#19981;&#20197;0&#24320;&#22836;&#30340;&#25968;&#23383;.&#25105;&#20204;&#36824;&#21487;&#20197;&#20801;&#35768;&#24320;&#22836;&#26377;&#19968;&#20010;&#36127;&#21495;&#65306;^(0|-?[1-9][0-9]*)$
+<span class="linenr">54: </span>&#36825;&#34920;&#31034;&#19968;&#20010;0&#25110;&#32773;&#19968;&#20010;&#21487;&#33021;&#20026;&#36127;&#30340;&#24320;&#22836;&#19981;&#20026;0&#30340;&#25968;&#23383;.&#35753;&#29992;&#25143;&#20197;0&#24320;&#22836;&#22909;&#20102;.&#25226;&#36127;&#21495;&#30340;&#20063;&#21435;&#25481;,&#22240;&#20026;&#38065;&#24635;&#19981;&#33021;&#26159;&#36127;&#30340;&#21543;&#12290;&#19979;&#38754;&#25105;&#20204;&#35201;&#21152;&#30340;&#26159;&#35828;&#26126;&#21487;&#33021;&#30340;&#23567;&#25968;&#37096;&#20998;&#65306;^[0-9]+(.[0-9]+)?$
+<span class="linenr">55: </span>&#24517;&#39035;&#35828;&#26126;&#30340;&#26159;,&#23567;&#25968;&#28857;&#21518;&#38754;&#33267;&#23569;&#24212;&#35813;&#26377;1&#20301;&#25968;,&#25152;&#20197;<span style="color: #E6DB74;">"10."</span>&#26159;&#19981;&#36890;&#36807;&#30340;,&#20294;&#26159; <span style="color: #E6DB74;">"10"</span> &#21644; <span style="color: #E6DB74;">"10.2"</span> &#26159;&#36890;&#36807;&#30340;&#65306;^[0-9]+(.[0-9]{2})?$
+<span class="linenr">56: </span>&#36825;&#26679;&#25105;&#20204;&#35268;&#23450;&#23567;&#25968;&#28857;&#21518;&#38754;&#24517;&#39035;&#26377;&#20004;&#20301;,&#22914;&#26524;&#20320;&#35748;&#20026;&#22826;&#33499;&#21051;&#20102;,&#21487;&#20197;&#36825;&#26679;&#65306;^[0-9]+(.[0-9]{1,2})?$
+<span class="linenr">57: </span>&#36825;&#26679;&#23601;&#20801;&#35768;&#29992;&#25143;&#21482;&#20889;&#19968;&#20301;&#23567;&#25968;.&#19979;&#38754;&#25105;&#20204;&#35813;&#32771;&#34385;&#25968;&#23383;&#20013;&#30340;&#36887;&#21495;&#20102;,&#25105;&#20204;&#21487;&#20197;&#36825;&#26679;&#65306;^[0-9]{1,3}(,[0-9]{3})*(.[0-9]{1,2})?$
+<span class="linenr">58: </span>1&#21040;3&#20010;&#25968;&#23383;,&#21518;&#38754;&#36319;&#30528;&#20219;&#24847;&#20010; &#36887;&#21495;+3&#20010;&#25968;&#23383;,&#36887;&#21495;&#25104;&#20026;&#21487;&#36873;,&#32780;&#19981;&#26159;&#24517;&#39035;&#65306;^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$
+<span class="linenr">59: </span>&#22791;&#27880;&#65306;&#36825;&#23601;&#26159;&#26368;&#32456;&#32467;&#26524;&#20102;,&#21035;&#24536;&#20102;<span style="color: #E6DB74;">"+"</span>&#21487;&#20197;&#29992;<span style="color: #E6DB74;">"*"</span>&#26367;&#20195;&#22914;&#26524;&#20320;&#35273;&#24471;&#31354;&#23383;&#31526;&#20018;&#20063;&#21487;&#20197;&#25509;&#21463;&#30340;&#35805;(&#22855;&#24618;,&#20026;&#20160;&#20040;?)&#26368;&#21518;,&#21035;&#24536;&#20102;&#22312;&#29992;&#20989;&#25968;&#26102;&#21435;&#25481;&#21435;&#25481;&#37027;&#20010;&#21453;&#26012;&#26464;,&#19968;&#33324;&#30340;&#38169;&#35823;&#37117;&#22312;&#36825;&#37324;
+<span class="linenr">60: </span>xml&#25991;&#20214;&#65306;^([a-zA-Z]+-?)+[a-zA-Z0-9]+<span style="color: #E6DB74;">\\</span>.[x|X][m|M][l|L]$
+<span class="linenr">61: </span>&#20013;&#25991;&#23383;&#31526;&#30340;&#27491;&#21017;&#34920;&#36798;&#24335;&#65306;[\u4e00-\u9fa5]
+<span class="linenr">62: </span>&#21452;&#23383;&#33410;&#23383;&#31526;&#65306;[^\x00-\xff] (&#21253;&#25324;&#27721;&#23383;&#22312;&#20869;&#65292;&#21487;&#20197;&#29992;&#26469;&#35745;&#31639;&#23383;&#31526;&#20018;&#30340;&#38271;&#24230;(&#19968;&#20010;&#21452;&#23383;&#33410;&#23383;&#31526;&#38271;&#24230;&#35745;2&#65292;ASCII&#23383;&#31526;&#35745;1))
+<span class="linenr">63: </span>&#31354;&#30333;&#34892;&#30340;&#27491;&#21017;&#34920;&#36798;&#24335;&#65306;\n\s*\r (&#21487;&#20197;&#29992;&#26469;&#21024;&#38500;&#31354;&#30333;&#34892;)
+<span class="linenr">64: </span>HTML&#26631;&#35760;&#30340;&#27491;&#21017;&#34920;&#36798;&#24335;&#65306;&lt;(\S*?)[^&gt;]*&gt;.*?|&lt;.*? /&gt; ( &#39318;&#23614;&#31354;&#30333;&#23383;&#31526;&#30340;&#27491;&#21017;&#34920;&#36798;&#24335;&#65306;^\s*|\s*$<span style="color: #F92672;">&#25110;</span>(^\s*)|(\s*$) (&#21487;&#20197;&#29992;&#26469;&#21024;&#38500;&#34892;&#39318;&#34892;&#23614;&#30340;&#31354;&#30333;&#23383;&#31526;(&#21253;&#25324;&#31354;&#26684;&#12289;&#21046;&#34920;&#31526;&#12289;&#25442;&#39029;&#31526;&#31561;&#31561;)&#65292;&#38750;&#24120;&#26377;&#29992;&#30340;&#34920;&#36798;&#24335;)
+<span class="linenr">65: </span>&#33150;&#35759;QQ&#21495;&#65306;[1-9][0-9]{4,} (&#33150;&#35759;QQ&#21495;&#20174;10000&#24320;&#22987;)
+<span class="linenr">66: </span>&#20013;&#22269;&#37038;&#25919;&#32534;&#30721;&#65306;[1-9]\d{5}(?!\d) (&#20013;&#22269;&#37038;&#25919;&#32534;&#30721;&#20026;6&#20301;&#25968;&#23383;)
+<span class="linenr">67: </span><span style="color: #F92672; font-style: italic;">IP&#22320;&#22336;&#65306;</span>((?:(?:25[0-5]|2[0-4]<span style="color: #E6DB74;">\\</span>d|[01]?<span style="color: #E6DB74;">\\</span>d?<span style="color: #E6DB74;">\\</span>d)<span style="color: #E6DB74;">\\</span>.){3}(?:25[0-5]|2[0-4]<span style="color: #E6DB74;">\\</span>d|[01]?<span style="color: #E6DB74;">\\</span>d?<span style="color: #E6DB74;">\\</span>d))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">1.23</span> 挂载非系统分区</h3>
+<div class="outline-text-3" id="text-1-23">
+<p>
+默认情况下，在ArchLinux中挂载非系统分区需要密码验证，非常麻烦，可以修改配置文件：<br  />
+</p>
+
+<p>
+/usr/share/polkit-1/actions/org.freedesktop.udisks2.policy<br  />
+</p>
+
+<p>
+将此配置文件中的<br  />
+</p>
+
+<p>
+&lt;action id="org.freedesktop.udisks2.filesystem-mount-system"&gt;<br  />
+</p>
+
+<p>
+标签中的子标签<br  />
+</p>
+
+<p>
+&lt;allow<sub>active</sub>&gt;&lt;/allow<sub>active</sub>&gt;<br  />
+</p>
+
+<p>
+的值改为yes即可无需通过密码验证直接挂载分区。<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24"><span class="section-number-3">1.24</span> 镜像排速</h3>
+<div class="outline-text-3" id="text-1-24">
+<p>
+reflector &#x2013;verbose -l 5 &#x2013;sort rate &#x2013;save /etc/pacman.d/mirrorlist<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">1.25</span> 清理日志</h3>
+<div class="outline-text-3" id="text-1-25">
+<ul class="org-ul">
+<li><p>
+手动清理日志<br  />
+</p>
+
+<p>
+/var/log/journal 存放着日志, rm 应该能工作. 或者使用journalctl,<br  />
+</p></li>
+
+<li><p>
+清理日志使总大小小于 100M:<br  />
+</p>
+
+<p>
+$ journalctl &#x2013;vacuum-size=100M<br  />
+</p></li>
+
+<li><p>
+清理最早两周前的日志.<br  />
+</p>
+
+<p>
+$ journalctl &#x2013;vacuum-time=2weeks<br  />
+</p></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26"><span class="section-number-3">1.26</span> 清理无用包</h3>
+<div class="outline-text-3" id="text-1-26">
+<p>
+sudo pacman -Rs $(pacman -Qtdq)<br  />
+</p>
+
+<p>
+sudo paccache -r<br  />
+</p>
+
+<p>
+paccache -rk 1<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">1.27</span> 删除文本的行</h3>
+<div class="outline-text-3" id="text-1-27">
+<p>
+sed -i '1d' a.txt删首行<br  />
+</p>
+
+<p>
+sed -i '$d' b.txt删尾行<br  />
+</p>
+
+<p>
+sed -i 's/[ ]*//g' c.txt删空格<br  />
+</p>
+
+<p>
+sed -i '/^$/d' d.txt删空行<br  />
+</p>
+
+<p>
+sed -i ‘/^[0-9]*$/d' a.txt删包含数字的行<br  />
+</p>
+
+<p>
+sed -i ‘1,2d’a.txt删2行<br  />
+</p>
+
+<p>
+sed -i ‘/love/d’ a.txt删包含string的行<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">1.28</span> 修复引导.txt</h3>
+<div class="outline-text-3" id="text-1-28">
+<p>
+chroot<br  />
+</p>
+
+<p>
+安装&amp;更新 Grub,代码如下：<br  />
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash">&#12288;&#12288;grub2-install /dev/sda
+&#12288;&#12288;grub2-mkconfig -o /boot/grub2/grub.cfg
+</pre>
+</div>
+
+<p>
+<a href="http://blog.csdn.net/u011152627/article/details/18925121">寒假折腾Archlinux的一些经验（新手向）&#x2013;桌面配置篇</a><br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29"><span class="section-number-3">1.29</span> 修改屏幕亮度</h3>
+<div class="outline-text-3" id="text-1-29">
+<p>
+/sys/class/backlight/acpi<sub>video0</sub>/brightness 设置为12<br  />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">1.30</span> 用户</h3>
+<div class="outline-text-3" id="text-1-30">
+<ul class="org-ul">
+<li>修改用户名<br  />
+usermod -l newuser -d /home/newuser -m olduser<br  /></li>
+
+<li>添加新用户<br  />
+useradd –d /home/myname -m myame<br  />
+useradd -m -g 初始组 -G 附加组 -s 登陆shell 用户<br  /></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">1.31</span> 重装所有软件</h3>
+<div class="outline-text-3" id="text-1-31">
+<p>
+如何重装所有包并保留安装和依赖信息？<br  />
+</p>
+
+<p>
+重装所有软件包：pacman -S $(pacman -Qnq)（-S 选项会保留安装缘由）。<br  />
+</p>
+
+<p>
+接着需要重装外来包（不在官方仓库里的软件包）。外来包可通过pacman -Qmq查看。<br  />
+</p>
+
+<hr  />
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2017-06-18 Sun 17:16</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
