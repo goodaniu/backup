@@ -1,9 +1,0 @@
-chroot 
-6.安装&更新 Grub
-　　代码如下：
-　　grub2-install /dev/sda
-　　grub2-mkconfig -o /boot/grub2/grub.cfg
-
-
-
-http://blog.csdn.net/u011152627/article/details/18925121

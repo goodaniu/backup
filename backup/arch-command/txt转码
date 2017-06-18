@@ -1,2 +1,0 @@
-iconv -f gb18030 -t utf-8 sanguozhi.txt >sgz.txt
-iconv -f CP850 -t UTF-8 sanguozhi.txt >sgz.txt

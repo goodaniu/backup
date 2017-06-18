@@ -1,7 +1,0 @@
-sed -i '1d' a.txt删首行
-sed -i '$d' b.txt删尾行
-sed -i 's/[ ]*//g' c.txt删空格
-sed -i '/^$/d' d.txt删空行
-sed -i ‘/^[0-9]*$/d' a.txt删包含数字的行
-sed -i ‘1,2d’a.txt删2行
-sed -i ‘/love/d’ a.txt删包含string的行

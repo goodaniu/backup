@@ -1,5 +1,5 @@
 #+OPTIONS: \n:t
 
-[[file:gentoo_FAQ/gentoo_FAQ.org]]
+[[file:linux_FAQ/linux使用集锦.org]]
 
 

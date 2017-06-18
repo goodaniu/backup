@@ -1,7 +1,0 @@
-1.新增配置文件备份
-sudo tar -cjvpP -T /home/spark/document/arch-backlist -f /home/data/backup/arch-backup.tar.bz2
-
-sudo tar -cjvpP -T filelist -f backup.tar.bz2
-
-
-# tar cvpzf backup.tgz –exclude=/proc –exclude=/lost+found –exclude=/backup.tgz –exclude=/mnt –exclude=/sys /

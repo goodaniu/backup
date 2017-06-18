@@ -1,8 +1,0 @@
-﻿使用 awmtt调试awesome
-awmttAUR (Awesome WM Testing Tool) 是一个基于 Xephyr 的易于使用的脚本。默认情况下，它会测试~/.config/awesome/rc.lua.test 。如果该文件不存在，它会测试当前使用的 rc.lua 。也可以指定要测试的配置文件所在路径：
-$ awmtt start -C ~/.config/awesome/rc.lua.new
-当测试完成后，使用以下命令关闭窗口:
-$ awmtt stop
-或者通过以下命令立即查看变化:
-$ awmtt restart
-
