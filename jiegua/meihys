@@ -15,7 +15,7 @@ other=~/ggg/jiegua/other
 ####变6  2  1  4  3  6  5  8  7
 
 if [[ $1 =~ help|date|cx|cm|cuo|zong|bian|ben ]];then
-	shang=1
+	:	
 else
 	int1=$RANDOM
 	int2=$RANDOM
