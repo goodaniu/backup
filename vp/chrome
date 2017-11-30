@@ -1,0 +1,2 @@
+#!/bin/bash
+if [ $1 = "谷歌" ];then exec google-chrome-stable;fi

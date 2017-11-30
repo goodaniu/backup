@@ -23,7 +23,7 @@ sudo dd bs=4M if=/home/spark/download/archlinux-2017.04.01-x86_64.iso of=/dev/sd
 一定要用 /dev/sdb 而不是 /dev/sdb1 ，否则会不能启动的。
 
 ** 如何升级完整地升级 @gentoo
-Gentoo 升级系统的标准步骤
+Gentoo 升级系统
 #+BEGIN_SRC bash
 emerge --sync      //升级整个portage目录
 emerge python     //如果不是最新的python，需要按提示执行此操作

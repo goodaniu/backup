@@ -1,0 +1,3 @@
+#!/bin/bash
+if [ $1 = "打开" ] ; then exec rofi -show run;fi
+

@@ -1,7 +1,7 @@
 #!/bin/bash
 #这个是用来梅花易数和查询卦的，下面两个路径请注意保持正确
-gua_dir=~/ggg/jiegua/guaci
-other=~/ggg/jiegua/other
+gua_dir=~/github/jiegua/guaci
+other=~/github/jiegua/other
 ####卦名 乾 兑 离 震 巽 坎 艮 坤
 ####本卦 1  2  3  4  5  6  7  8 已知
 ####二进 7  3  5  1  6  2  4  0 求

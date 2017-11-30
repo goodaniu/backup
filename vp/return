@@ -1,0 +1,2 @@
+#!/bin/bash
+if [ $1 = "回车" ];then ;fi
