@@ -214,14 +214,13 @@ git add -i //交互式添加文件到暂存区
 
 #+END_SRC
 
-  
 ** chrome不能输入中文
 #+BEGIN_SRC bash
 ibus-daemon -drx
 #+END_SRC
 
 ** chrome浏览器插件：cvim修改搜索引擎
-#+BEGIN_QUOTE
+#+BEGIN_SRC bash
 :let searchengine baidu = "https://www.baidu.com/s?ie=UTF-8&wd=%s"  #设置搜索引擎
 :set defaultengine = "baidu" #设置为默认
 :map a :tabnew baidu  #修改快捷键
@@ -229,4 +228,4 @@ ibus-daemon -drx
 :let searchalias b = "baidu"   #别名，这一项不是必须的，但是在使用t是比较有用
 :let searchengine fanyi = "http://fanyi.baidu.com/#en/zh/%s"
 :let searchengine zhwikipedia = "https://zh.wikipedia.org/wiki/%s"
-#+END_QUOTE
+#+END_SRC
