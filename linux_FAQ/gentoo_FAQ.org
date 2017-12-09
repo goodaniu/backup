@@ -235,7 +235,7 @@ let searchengine w = "https://zh.wikipedia.org/wiki/%s"
 #+END_SRC
 
 ** qemu命令
-
+#+BEGIN_SRC bash
 - 创建镜像，如raw,qcow2,img
   qemu-img create -f raw test.raw 8G
   qemu-img create -f qcow2 test.img 10G
@@ -247,3 +247,4 @@ let searchengine w = "https://zh.wikipedia.org/wiki/%s"
   qemu-system-x86_64 test.img
 - 用kvm启动
   qemu-system-x86_64 -m 512 -enable-kvm test.img
+#+END_SRC
