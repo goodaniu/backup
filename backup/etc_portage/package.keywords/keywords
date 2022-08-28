@@ -1,0 +1,11 @@
+=sys-power/thermald-1.6 ~amd64
+=app-i18n/ibus-table-chinese-1.4.6 ~amd64
+=net-misc/iptux-0.6.3 ~amd64
+=www-client/google-chrome-58.0.3029.110 ~amd64
+=x11-misc/urxvtconfig-1.0 ~amd64
+=media-sound/kwplayer-3.5.2 ~amd64
+=www-client/uget-1.10.4 ~amd64
+=net-misc/aria2-1.31.0 ~amd64
+##kwplayer dependency
+=dev-python/python-ctags-1.2.3 ~amd64
+=dev-python/python3-xlib-0.15 ~amd64

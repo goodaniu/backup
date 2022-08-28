@@ -1,0 +1,7 @@
+[gentoo-zh]
+priority = 50
+location = /var/lib/layman/gentoo-zh
+layman-type = git
+auto-sync = yes
+sync-type = git
+sync-uri = git://github.com/microcai/gentoo-zh.git

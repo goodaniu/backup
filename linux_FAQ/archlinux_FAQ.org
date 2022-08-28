@@ -1,0 +1,838 @@
+#+title:archlinux使用FAQ
+#+email:goodaniu@163.com
+#+options: \n:t num:t toc:t f:nil
+#+startup:indent
+* archlinux
+** archlinux备份配置文件
+
+1.新增配置文件备份
+#+BEGIN_SRC bash
+sudo tar -cjvpP -T /home/spark/document/arch-backlist -f /home/data/backup/arch-backup.tar.bz2
+sudo tar -cjvpP -T filelist -f backup.tar.bz2
+tar cvpzf backup.tgz –exclude=/proc –exclude=/lost+found –exclude=/backup.tgz –exclude=/mnt –exclude=/sys /
+#+END_SRC
+
+** awmtt-test-awesome
+
+使用 awmtt调试awesome 
+awmttAUR (Awesome WM Testing Tool) 是一个基于 Xephyr 的易于使用的脚本。默认情况下，它会测试~/.config/awesome/rc.lua.test 。如果该文件不存在，它会测试当前使用的 rc.lua 。也可以指定要测试的配置文件所在路径：
+
+#+BEGIN_SRC bash
+$ awmtt start -C ~/.config/awesome/rc.lua.new
+$ awmtt stop
+$ awmtt restart
+#+END_SRC
+
+** chattr
+#+BEGIN_QUOTE
+chattr命令文件权限属性设置
+
+lsattr命令可以查看文件的第二扩展文件系统属性
+chattr命令用来改变文件属性。这项指令可改变存放在ext2文件系统上的文件或目录属性，这些属性共有以下8种模式：
+
+a：让文件或目录仅供附加用途；
+b：不更新文件或目录的最后存取时间；
+c：将文件或目录压缩后存放；
+d：将文件或目录排除在倾倒操作之外；
+i：不得任意更动文件或目录；
+s：保密性删除文件或目录；
+S：即时更新文件或目录；
+u：预防意外删除。
+语法
+chattr(选项)
+选项
+-R：递归处理，将指令目录下的所有文件及子目录一并处理；
+-v<版本编号>：设置文件或目录版本；
+-V：显示指令执行过程；
++<属性>：开启文件或目录的该项属性；
+-<属性>：关闭文件或目录的该项属性；
+=<属性>：指定文件或目录的该项属性。
+实例
+用chattr命令防止系统中某个关键文件被修改：
+
+chattr +i /etc/fstab
+然后试一下rm、mv、rename等命令操作于该文件，都是得到Operation not permitted的结果。
+
+让某个文件只能往里面追加内容，不能删除，一些日志文件适用于这种操作：
+
+chattr +a /data1/user_act.log
+#+END_QUOTE
+
+** chroot
+
+#+BEGIN_SRC bash
+
+ mount /dev/sdxY /mnt         
+ mount /dev/sdxZ /mnt/boot   
+ cd /mnt
+ sudo mount -t proc proc proc/
+ sudo mount --rbind /sys sys/
+ sudo mount --rbind /dev dev/
+ sudo mount --rbind /run run/
+ sudo cp /etc/resolv.conf etc/resolv.conf 
+ sudo chroot /mnt /bin/bash
+ source /etc/profile
+ source ~/.bashrc
+ export PS1="(chroot) $PS1"
+
+ exit
+ cd /
+ sudo umount -R /mnt  # umount --recursive /location/of/new/root
+
+#+END_SRC
+** comm
+
+#+BEGIN_QUOTE
+原始文件如下：
+a.txt
+d
+c
+b
+a
+
+b.txt
+g
+f
+b
+a
+排序处理 
+sort a.txt > a1.txt
+sort b.txt > b1.txt
+处理结果文件如下： 
+a1.txt
+a
+b
+c
+d
+
+b1.txt
+a
+b
+f
+g
+比较处理 
+
+| comm | a1.txt | b1.txt |
+| 1    | 2      | 3      |
+|------+--------+--------|
+|      |        | a      |
+|      |        | b      |
+|      | f      |        |
+|      | g      |        |
+| c    |        |        |
+| d    |        |        |
+输出结果包括3列 其中第3列显示的是2个文件中都包含的内容。
+第1列显示只包含在第一个文件a.txt中的
+第2列显示只包含在第二个文件b.txt中的
+
+可以通过参数指定要显示的列 如：
+comm a1.txt b1.txt -12
+a
+b
+
+-3 显示两个文件特有的行
+-1 显示第2个文件所有行
+-2 显示第1个文件所有的行
+-12 不显示第1列和第2列，只显示第3列，即两个文件共有的行
+-13 不显示第1，3列，显示第2列，即第2个文件特有的行
+-23 不显示第2，3列，显示第1列，即第1个文件特有的行
+#+END_QUOTE
+
+** cp完全复制迁移系统
+
+#+BEGIN_SRC bash
+#!/bin/bash
+mkdir /mnt/old
+mkdir /mnt/new
+mount /dev/sda5 /mnt/old
+mount /dev/sda1 /mnt/new
+cp -aP /mnt/old /mnt/new
+nano /etc/fstab
+sudo update-grub
+#+END_SRC
+
+** kill_tty
+
+1. 用tty命令可以得到终端名，如：
+
+   #+BEGIN_SRC bash
+   tty
+   /dev/tty1
+   #+END_SRC
+2. 用ps -t 命令可以得到终端的进程号，如：
+   $ ps -t tty1       或 ps -t /dev/tty1
+
+   PID TTY          TIME CMD
+   
+   31419 tty1    00:00:00 bash
+
+3. 用kill -9命令可以将进程杀掉，以关闭终端。前提：kill命令的执行者必须是超级用户或对tty1的进程有操作权限，否则，命令会报错：Operation not permitted，如：
+   $ kill -9 31419
+
+** ln
+
+ln -s /home/spark/.cache/kuwo/song ~/music/
+
+ln -s 源目录  新链接
+
+** mp3乱码
+
+mid3iconv -e gbk *.mp3
+
+** org-mode的一些技巧
+
+#+BEGIN_QUOTE
+用org-mode写博客
+
+1 配置GNU Emacs 的编码
+
+在配置文件里写入以下内容
+
+(setq current-language-environment "UTF-8")
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+2 修改GNU Emacs 的lisp包
+
+去掉与HOME相连的UP
+
+2.1 linux
+
+我的系统是slackware 14.1，源码编译安装最新的emacs24.5前，修改lisp/org/ox-html.el，找到‘，删删除’UP‘，用M-x byte-compile-file编译成elc文件。
+
+2.2 Windows
+
+打开 lisp/org/org-html.el lisp/org/ox-html.el 修改org-export-html-home/up-format
+
+(defcustom org-export-html-home/up-format
+  "<div id=\"org-div-home-and-up\" style=\"text-align:right;font-size:100%%;white-space:nowrap;\">
+<a accesskey=\"H\" href=\"%s\"> HOME </a>
+</div>"
+  "Snippet used to insert the HOME and UP links.
+This is a format string, the first %s will receive the UP link,
+the second the HOME link.  If both `org-export-html-link-up' and
+`org-export-html-link-home' are empty, the entire snippet will be
+ignored."
+  :group 'org-export-html
+  :type 'string)
+因为GNU Emacs 默认会读elc文件，所以修改好后，用M-x byte-compile-file 编译一下。
+
+3 去掉Validate XHTML 1.0
+
+在配置文件里写入
+
+(setq org-export-html-validation-link nil)
+在org-mode 8 中更改为org-html-validation-link
+
+4 介绍模板文件
+
+4.1 Google Analytisc
+
+Google Analytisc 代码用#+HTML_HEAD逐行写在内容前面。
+
+4.2 Disqus
+
+Disqus 代码用#+BEGIN_HTML #+END_HTML 写在内容后面。
+
+4.3 网页
+
+4.3.1 CSS 文件
+
+CSS 代码参考这个
+
+<link rel="stylesheet" type="text/css" href="/css/worg.css" />
+前面加#+HTML_HEAD 加在内容前面。
+
+4.3.2 favicon
+
+参考
+
+<LINK REL="SHORTCUT ICON" HREF="/IMAGES/FAVICON.ICO"/>
+4.3.3 DESCRIPTION
+
+用#+DESCRIPTION: 添加
+
+4.3.4 网页标题
+
+用#+TITLE: 添加
+
+4.3.5 主页
+
+用#+LINK_HOME: 添加
+
+4.4 文档元数据
+
+下面的内容都是ORG-MODE 默认开启，而我要关闭它们。这节的配置都写在#+OPTIONS: 后面
+
+4.4.1 取消目录里各级标题前的数字
+
+NUM:NIL
+
+4.4.2 取消生成工具
+
+CREATOR:NIL
+
+4.4.3 取消作者
+
+AUTHOR:NIL
+
+4.4.4 取消时间
+
+TIMESTAMP:NIL
+
+4.4.5 取消目录
+
+TOC:NIL
+
+4.4.6 取消TEX的转义
+
+_ 会使得后面的内容变成下标，加上下面的选项可以避免。 ^:NIL
+
+4.5 内容元数据
+
+4.5.1 加源代码
+
+用#+BEGIN_SRC C -N … #+END_SRC，C可以换成别的语言，-N显示行号。
+
+4.5.2 内容居中
+
+用#+BEGIN_CENTER … #+END_CENTER
+
+4.5.3 插入HTML
+
+用#+BEGIN_HTML … #+END_HTML
+
+#+END_QUOTE
+
+** send-mail
+
+发送邮件
+
+echo "测试test" | mutt -s "test" goodaniu@163.com
+
+直接发送，不会打开vim和邮件发送客户端
+
+mutt goodaniu@163.com -s 'test send mail'
+
+会打开vim编辑器和邮件客户端，需要手工输入一些控制命令
+
+** swapfile
+
+#+BEGIN_SRC bash
+fallocate -l 1G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo  "/swapfile					none 		swap 		defaults 	0 0" >>/etc/fstab
+#+END_SRC
+
+** tar
+
+#+BEGIN_QUOTE
+tar命令文件压缩与解压
+
+其实最简单的使用 tar 就只要记忆底下的方式即可：
+
+压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称
+查　询：tar -jtv -f filename.tar.bz2
+解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录
+
+
+tar命令可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。
+
+首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。
+
+为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。
+
+语法
+tar(选项)(参数)
+选项
+-A或--catenate：新增文件到以存在的备份文件；
+-B：设置区块大小；
+-c或--create：建立新的备份文件；
+-C <目录>：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。
+-d：记录文件的差别；
+-x或--extract或--get：从备份文件中还原文件；
+-t或--list：列出备份文件的内容；
+-z或--gzip或--ungzip：通过gzip指令处理备份文件；
+-Z或--compress或--uncompress：通过compress指令处理备份文件；
+-f<备份文件>或--file=<备份文件>：指定备份文件；
+-v或--verbose：显示指令执行过程；
+-r：添加文件到已经压缩的文件；
+-u：添加改变了和现有的文件到已经存在的压缩文件；
+-j：支持bzip2解压文件；
+-v：显示操作过程；
+-l：文件系统边界设置；
+-k：保留原有文件不覆盖；
+-m：保留文件不被覆盖；
+-w：确认压缩文件的正确性；
+-p或--same-permissions：用原来的文件权限还原文件；
+-P或--absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；
+-N <日期格式> 或 --newer=<日期时间>：只将较指定日期更新的文件保存到备份文件里；
+--exclude=<范本样式>：排除符合范本样式的文件。
+参数
+文件或目录：指定要打包的文件或目录列表。
+
+实例
+将文件全部打包成tar包：
+
+tar -cvf log.tar log2012.log    仅打包，不压缩！ 
+tar -zcvf log.tar.gz log2012.log   打包后，以 gzip 压缩 
+tar -jcvf log.tar.bz2 log2012.log  打包后，以 bzip2 压缩 
+在选项f之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加z选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加j选项，则以.tar.bz2来作为tar包名。
+
+查阅上述tar包内有哪些文件：
+
+tar -ztvf log.tar.gz
+由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上z这个选项了。
+
+将tar包解压缩：
+
+tar -zxvf /opt/soft/test/log.tar.gz
+在预设的情况下，我们可以将压缩档在任何地方解开的
+
+只将tar内的部分文件解压出来：
+
+tar -zxvf /opt/soft/test/log30.tar.gz log2013.log
+我可以透过tar -ztvf来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！
+
+文件备份下来，并且保存其权限：
+
+tar -zcvpf log31.tar.gz log2014.log log2015.log log2016.log
+这个-p的属性是很重要的，尤其是当您要保留原本文件的属性时。
+
+在文件夹当中，比某个日期新的文件才备份：
+
+tar -N "2012/11/13" -zcvf log17.tar.gz test
+备份文件夹内容是排除部分文件：
+
+tar --exclude scf/service -zcvf scf.tar.gz scf/*
+
+#+END_QUOTE
+
+** tar.txt
+
+#+BEGIN_QUOTE
+﻿tar命令文件压缩与解压
+
+其实最简单的使用 tar 就只要记忆底下的方式即可： 
+压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称 
+查　询：tar -jtv -f filename.tar.bz2 
+解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录
+
+-c: 建立压缩档案
+-x：解压
+-t：查看内容
+-r：向压缩归档文件末尾追加文件
+-u：更新原压缩包中的文件
+这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。
+
+-z：有gzip属性的
+-j：有bz2属性的
+-Z：有compress属性的
+-v：显示所有过程
+-O：将文件解开到标准输出
+-p或--same-permissions：用原来的文件权限还原文件；
+
+下面的参数-f是必须的
+-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。
+ tar -cf all.tar *.jpg
+这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。
+ tar -rf all.tar *.gif
+这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。
+
+ tar -uf all.tar logo.gif
+这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。
+
+ tar -tf all.tar
+这条命令是列出all.tar包中所有文件，-t是列出文件的意思
+
+ tar -xf all.tar
+这条命令是解出all.tar包中所有文件，-t是解开的意思
+压缩
+tar -cvf jpg.tar *.jpg //将目录里所有jpg文件打包成tar.jpg 
+tar -czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz
+ tar -cjf jpg.tar.bz2 *.jpg //将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个bzip2压缩过的包，命名为jpg.tar.bz2
+tar -cZf jpg.tar.Z *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个umcompress压缩过的包，命名为jpg.tar.Z
+rar a jpg.rar *.jpg //rar格式的压缩，需要先下载rar for linux
+zip jpg.zip *.jpg //zip格式的压缩，需要先下载zip for linux
+解压
+tar -xvf file.tar //解压 tar包
+tar -xzvf file.tar.gz //解压tar.gz
+tar -xjvf file.tar.bz2   //解压 tar.bz2
+tar -xZvf file.tar.Z   //解压tar.Z
+unrar e file.rar //解压rar
+unzip file.zip //解压zip
+总结
+1、*.tar 用 tar -xvf 解压
+2、*.gz 用 gzip -d或者gunzip 解压
+3、*.tar.gz和*.tgz 用 tar -xzf 解压
+4、*.bz2 用 bzip2 -d或者用bunzip2 解压
+5、*.tar.bz2用tar -xjf 解压
+6、*.Z 用 uncompress 解压
+7、*.tar.Z 用tar -xZf 解压
+8、*.rar 用 unrar e解压
+9、*.zip 用 unzip 解压
+
+#+END_QUOTE
+** txt转码
+
+iconv -f gb18030 -t utf-8 sanguozhi.txt >sgz.txt
+
+iconv -f CP850 -t UTF-8 sanguozhi.txt >sgz.txt
+
+** vim去除所有中文字符
+
+:%s/\v[^\x00-\xff]+//g 
+
+** xinit
+
+#+BEGIN_QUOTE
+~/.xinitrc
+...
+
+ Here Xfce is kept as default
+session=${1:-xfce}
+
+case $session in
+    awesome           ) exec awesome;;
+    bspwm             ) exec bspwm;;
+    catwm             ) exec catwm;;
+    cinnamon          ) exec cinnamon-session;;
+    dwm               ) exec dwm;;
+    enlightenment     ) exec enlightenment_start;;
+    ede               ) exec startede;;
+    fluxbox           ) exec startfluxbox;;
+    gnome             ) exec gnome-session;;
+    gnome-classic     ) exec gnome-session --session=gnome-classic;;
+    i3|i3wm           ) exec i3;;
+    icewm             ) exec icewm-session;;
+    jwm               ) exec jwm;;
+    kde               ) exec startkde;;
+    mate              ) exec mate-session;;
+    monster|monsterwm ) exec monsterwm;;
+    notion            ) exec notion;;
+    openbox           ) exec openbox-session;;
+    unity             ) exec unity;;
+    xfce|xfce4        ) exec startxfce4;;
+    xmonad            ) exec xmonad;;
+    # No known session, try to run it as command
+    *) exec $1;;
+esac
+#+END_QUOTE
+
+#+BEGIN_SRC bash
+$ xinit
+$ xinit gnome
+$ xinit kde
+$ xinit wmaker
+
+$ startx
+$ startx ~/.xinitrc gnome
+$ startx ~/.xinitrc kde
+$ startx ~/.xinitrc wmaker
+
+#+END_SRC
+** xinitrc
+
+#+BEGIN_QUOTE
+# Here Xfce is kept as default
+session=${1:-xfce}
+
+case $session in
+    chromium         ) exec chromium;;
+    awesome           ) exec awesome;;
+    bspwm             ) exec bspwm;;
+    catwm             ) exec catwm;;
+    cinnamon          ) exec cinnamon-session;;
+    dwm               ) exec dwm;;
+    enlightenment     ) exec enlightenment_start;;
+    ede               ) exec startede;;
+    fluxbox           ) exec startfluxbox;;
+    gnome             ) exec gnome-session;;
+    gnome-classic     ) exec gnome-session --session=gnome-classic;;
+    i3|i3wm           ) exec i3;;
+    icewm             ) exec icewm-session;;
+    jwm               ) exec jwm;;
+    kde               ) exec startkde;;
+    mate              ) exec mate-session;;
+    monster|monsterwm ) exec monsterwm;;
+    notion            ) exec notion;;
+    openbox           ) exec openbox-session;;
+    unity             ) exec unity;;
+    xfce|xfce4        ) exec startxfce4;;
+    xmonad            ) exec xmonad;;
+    # No known session, try to run it as command
+    *) exec $1;;
+esac
+#+END_QUOTE
+
+** xrandr
+
+archlinux 下显示器管理利器 xrandr
+
+xrandr 显示可以识别到的显示器
+
+xrandr --output VGA --auto 当前桌面会复制到VGA上面，此时执行xrandr会看到有了VGA-0
+
+扩展桌面 xrandr ----output VGA-0 --auto --left-of LVDS
+
+** 备份和恢复已安装软件包
+
+#+BEGIN_QUOTE
+一、备份和恢复已安装软件包
+定期备份软件包是个好习惯。万一系统出了大问题，需要重装，就可以利用备份的软件包恢复到原先的系统。
+
+第一步，生成系统上安装的非本地（即从官方仓库获取的）软件包列表：
+ $ comm -23 <(pacman -Qeq|sort) <(pacman -Qmq|sort) > pkglist
+把生成的pkglist存储在一个安全的地方，比如U盘，或者gist.github.com、evernote、dropbox之类的文本储存网站。
+今后重装系统时，把pkglist复制到新系统。
+使用如下命令安装所有软件包：
+ $ pacman -S $(< pkglist)
+要是备份的软件包列表包含非官方软件包（从AUR或其他什么地方下载的），就得使用下面这个吓人的命令了，不然pacman会出错：
+
+$ pacman -S --needed $(diff <(cat badpkglist|sort) <(diff <(cat badpkglist|sort) <(pacman -Slq|sort)|grep \<|cut -f2 -d' ')|grep \<|cut -f2 -d' ')
+解释：
+
+pacman -Slq列出所有可以安装的软件包。由于输出是按照来源仓库排序的，需要再调用sort排序。
+排序是为diff命令比对列表做准备。
+第一个diff返回所有无法安装的软件包；第二个返回所有可以安装的软件包。
+--needed表示跳过已安装软件包。
+可以接着用yaourt恢复从AUR获取的软件包（不推荐）：
+
+$ yaourt -S --noconfirm $(diff <(cat badpkglist|sort) <(pacman -Slq|sort) |grep \<|cut -f2 -d' ')
+最后，还可以卸载掉新系统上安装的、但之前系统并未安装的软件包。 警告：务必小心使用，仔细查看pacman输出，避免悲剧。
+
+$ pacman -Rsu $(diff <(cat badpkglist|sort) <(pacman -Qq|sort) | grep \>|cut -f2 -d' ')
+
+二、列出所有不属于base或base-devel的已安装软件包
+下列命令输出所有不属于base或base-devel软件包组的已安装软件包。这些软件包一般都是用户自己安装的：
+##############################
+##############################
+##############################
+
+comm -23 <(pacman -Qeq|sort) <(pacman -Qgq base base-devel|sort)  >pkglist
+comm -12 <(comm -23 <(pacman -Qeq|sort) <(pacman -Qmq|sort)) <(sort pkglist) | pacman -S -           # paclist
+comm -13 <(comm -23 <(pacman -Qeq|sort) <(pacman -Qmq|sort)) <(sort pkglist) | yaourt -S -              #aurlist
+comm -12 <(comm -23 <(pacman -Qdq|sort) <(pacman -Qmq|sort)) <(sort pkglist) | pacman -S --asdeps -      #asdepslist
+##############################
+##############################
+##############################
+
+三、重新安装所有软件包
+
+这要是你的系统遭到了大规模破坏（比如rm -rf什么的），可以通过pacman重新安装所有软件包来挽救。
+
+如果没有安装外来软件包（比如来自AUR的），使用如下命令即可：
+
+$ pacman -Qeq | pacman -S -
+$ pacman -Qdq | pacman -S --asdeps -
+如果安装了外来软件包，使用上面的命令会出错。下面的命令先生成所有软件包列表，再用pacman -Qmq剔除外来软件包，即重新安装所有仓库中可以找到的软件包，同时保留依赖安装、手动安装标志：
+
+$ comm -23 <(pacman -Qeq) <(pacman -Qmq) | pacman -S -
+$ comm -23 <(pacman -Qdq) <(pacman -Qmq) | pacman -S --asdeps -
+
+
+1.Recreate a package from the file system
+Keeping a list of explicitly installed packages can be useful to speed up installation on a new system:
+
+	$ pacman -Qqe > pkglist.txt
+
+Note: If you used -Qqet, when reinstalling the list all the non-top-level packages would be set as dependencies.
+To install packages from the list backup, run:
+
+	$ pacman -S - < pkglist.txt
+Tip: Use 	comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > optdeplist.txt	 to also create a list of the installed optional dependencies which can be reinstalled with --asdeps.
+In case the list includes foreign packages, such as AUR packages, remove them first:
+
+	$ pacman -S $(comm -12 <(pacman -Slq | sort) <(sort pkglist.txt))
+To remove all the packages on your system that are not mentioned in the list:
+
+	$ pacman -Rsu $(comm -23 <(pacman -Qq | sort) <(sort pkglist.txt))
+
+2.Reinstalling all packages
+To reinstall all native packages, use:
+
+	$ pacman -Qnq | pacman -S -
+Foreign (AUR) packages must be reinstalled separately; you can list them with 	pacman -Qmq.
+
+#+END_QUOTE
+** 查看文件夹大小
+
+#+BEGIN_SRC bash
+df -h   #查看挂载信息
+du -sh  #当前目录
+du -sh *	sort -n 统计当前文件夹(目录)大小，并按文件大小排序
+du -skh /video
+sudo du -skh /var
+#+END_SRC
+
+** 常用正则表达式
+
+#+BEGIN_SRC bash -n
+
+常用正则表达式
+一、校验数字的表达式
+数字：^[0-9]*$
+n位的数字：^\d{n}$
+至少n位的数字：^\d{n,}$
+m-n位的数字：^\d{m,n}$
+零和非零开头的数字：^(0|[1-9][0-9]*)$
+非零开头的最多带两位小数的数字：^([1-9][0-9]*)+(.[0-9]{1,2})?$
+带1-2位小数的正数或负数：^(\-)?\d+(\.\d{1,2})?$
+正数、负数、和小数：^(\-|\+)?\d+(\.\d+)?$
+有两位小数的正实数：^[0-9]+(\.[0-9]{2})?$
+有1~3位小数的正实数：^[0-9]+(\.[0-9]{1,3})?$
+非零的正整数：^[1-9]\d*$ 或 ^([1-9][0-9]*){1,3}$ 或 ^\+?[1-9][0-9]*$
+非零的负整数：^\-[1-9][]0-9"*$ 或 ^-[1-9]\d*$
+非负整数：^\d+$ 或 ^[1-9]\d*|0$
+非正整数：^-[1-9]\d*|0$ 或 ^((-\d+)|(0+))$
+非负浮点数：^\d+(\.\d+)?$ 或 ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$
+非正浮点数：^((-\d+(\.\d+)?)|(0+(\.0+)?))$ 或 ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$
+正浮点数：^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$ 或 ^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$
+负浮点数：^-([1-9]\d*\.\d*|0\.\d*[1-9]\d*)$ 或 ^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$
+浮点数：^(-?\d+)(\.\d+)?$ 或 ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$
+校验字符的表达式
+汉字：^[\u4e00-\u9fa5]{0,}$
+英文和数字：^[A-Za-z0-9]+$ 或 ^[A-Za-z0-9]{4,40}$
+长度为3-20的所有字符：^.{3,20}$
+由26个英文字母组成的字符串：^[A-Za-z]+$
+由26个大写英文字母组成的字符串：^[A-Z]+$
+由26个小写英文字母组成的字符串：^[a-z]+$
+由数字和26个英文字母组成的字符串：^[A-Za-z0-9]+$
+由数字、26个英文字母或者下划线组成的字符串：^\w+$ 或 ^\w{3,20}$
+中文、英文、数字包括下划线：^[\u4E00-\u9FA5A-Za-z0-9_]+$
+中文、英文、数字但不包括下划线等符号：^[\u4E00-\u9FA5A-Za-z0-9]+$ 或 ^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$
+可以输入含有^%&',;=?$\"等字符：[^%&',;=?$\x22]+
+禁止输入含有~的字符：[^~\x22]+
+三、特殊需求表达式
+Email地址：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+域名：[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(/.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+/.?
+InternetURL：[a-zA-z]+://[^\s]* 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$
+手机号码：^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$
+电话号码("XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX)：^(\(\d{3,4}-)|\d{3.4}-)?\d{7,8}$
+国内电话号码(0511-4405222、021-87888822)：\d{3}-\d{8}|\d{4}-\d{7}
+电话号码正则表达式（支持手机号码，3-4位区号，7-8位直播号码，1－4位分机号）: ((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)
+身份证号(15位、18位数字)，最后一位是校验位，可能为数字或字符X：(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)
+帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$
+密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w{5,17}$
+强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在8-10之间)：^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$
+日期格式：^\d{4}-\d{1,2}-\d{1,2}
+一年的12个月(01～09和1～12)：^(0?[1-9]|1[0-2])$
+一个月的31天(01～09和1～31)：^((0?[1-9])|((1|2)[0-9])|30|31)$
+钱的输入格式：
+有四种钱的表示形式我们可以接受:"10000.00" 和 "10,000.00", 和没有 "分" 的 "10000" 和 "10,000"：^[1-9][0-9]*$
+这表示任意一个不以0开头的数字,但是,这也意味着一个字符"0"不通过,所以我们采用下面的形式：^(0|[1-9][0-9]*)$
+一个0或者一个不以0开头的数字.我们还可以允许开头有一个负号：^(0|-?[1-9][0-9]*)$
+这表示一个0或者一个可能为负的开头不为0的数字.让用户以0开头好了.把负号的也去掉,因为钱总不能是负的吧。下面我们要加的是说明可能的小数部分：^[0-9]+(.[0-9]+)?$
+必须说明的是,小数点后面至少应该有1位数,所以"10."是不通过的,但是 "10" 和 "10.2" 是通过的：^[0-9]+(.[0-9]{2})?$
+这样我们规定小数点后面必须有两位,如果你认为太苛刻了,可以这样：^[0-9]+(.[0-9]{1,2})?$
+这样就允许用户只写一位小数.下面我们该考虑数字中的逗号了,我们可以这样：^[0-9]{1,3}(,[0-9]{3})*(.[0-9]{1,2})?$
+1到3个数字,后面跟着任意个 逗号+3个数字,逗号成为可选,而不是必须：^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$
+备注：这就是最终结果了,别忘了"+"可以用"*"替代如果你觉得空字符串也可以接受的话(奇怪,为什么?)最后,别忘了在用函数时去掉去掉那个反斜杠,一般的错误都在这里
+xml文件：^([a-zA-Z]+-?)+[a-zA-Z0-9]+\\.[x|X][m|M][l|L]$
+中文字符的正则表达式：[\u4e00-\u9fa5]
+双字节字符：[^\x00-\xff] (包括汉字在内，可以用来计算字符串的长度(一个双字节字符长度计2，ASCII字符计1))
+空白行的正则表达式：\n\s*\r (可以用来删除空白行)
+HTML标记的正则表达式：<(\S*?)[^>]*>.*?|<.*? /> ( 首尾空白字符的正则表达式：^\s*|\s*$或(^\s*)|(\s*$) (可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式)
+腾讯QQ号：[1-9][0-9]{4,} (腾讯QQ号从10000开始)
+中国邮政编码：[1-9]\d{5}(?!\d) (中国邮政编码为6位数字)
+IP地址：((?:(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|[01]?\\d?\\d))
+#+END_SRC
+** 挂载非系统分区
+
+默认情况下，在ArchLinux中挂载非系统分区需要密码验证，非常麻烦，可以修改配置文件：
+
+/usr/share/polkit-1/actions/org.freedesktop.udisks2.policy
+
+将此配置文件中的
+
+<action id="org.freedesktop.udisks2.filesystem-mount-system">
+
+标签中的子标签
+
+<allow_active></allow_active>
+
+的值改为yes即可无需通过密码验证直接挂载分区。
+
+** 镜像排速
+
+reflector --verbose -l 5 --sort rate --save /etc/pacman.d/mirrorlist
+
+** 清理日志
+
+- 手动清理日志
+  
+  /var/log/journal 存放着日志, rm 应该能工作. 或者使用journalctl,
+
+- 清理日志使总大小小于 100M:
+
+  $ journalctl --vacuum-size=100M
+
+- 清理最早两周前的日志.
+
+  $ journalctl --vacuum-time=2weeks
+
+** 清理无用包
+
+sudo pacman -Rs $(pacman -Qtdq)
+
+sudo paccache -r
+
+paccache -rk 1
+
+** 删除文本的行
+
+sed -i '1d' a.txt删首行
+
+sed -i '$d' b.txt删尾行
+
+sed -i 's/[ ]*//g' c.txt删空格
+
+sed -i '/^$/d' d.txt删空行
+
+sed -i ‘/^[0-9]*$/d' a.txt删包含数字的行
+
+sed -i ‘1,2d’a.txt删2行
+
+sed -i ‘/love/d’ a.txt删包含string的行
+
+** 修复引导.txt
+
+chroot 
+
+安装&更新 Grub,代码如下：
+
+#+BEGIN_SRC bash
+　　grub2-install /dev/sda
+　　grub2-mkconfig -o /boot/grub2/grub.cfg
+#+END_SRC
+
+[[http://blog.csdn.net/u011152627/article/details/18925121][寒假折腾Archlinux的一些经验（新手向）--桌面配置篇]]
+
+** 修改屏幕亮度
+
+
+ /sys/class/backlight/acpi_video0/brightness 设置为12
+
+** 用户
+
+- 修改用户名
+  usermod -l newuser -d /home/newuser -m olduser
+
+- 添加新用户
+  useradd –d /home/myname -m myame
+  useradd -m -g 初始组 -G 附加组 -s 登陆shell 用户
+
+** 重装所有软件
+
+如何重装所有包并保留安装和依赖信息？
+
+重装所有软件包：pacman -S $(pacman -Qnq)（-S 选项会保留安装缘由）。
+
+接着需要重装外来包（不在官方仓库里的软件包）。外来包可通过pacman -Qmq查看。
+
+---------
+
