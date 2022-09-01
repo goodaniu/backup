@@ -1,6 +1,0 @@
-#+OPTIONS: \n:t
-
-[[file:linux_FAQ/gentoo_FAQ.org][gentoo使用集锦]]
-
-[[file:linux_FAQ/archlinux_FAQ.org][archlinux使用集锦]]
-
